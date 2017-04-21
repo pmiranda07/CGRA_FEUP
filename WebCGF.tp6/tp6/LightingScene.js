@@ -31,6 +31,7 @@ LightingScene.prototype.init = function(application) {
 
 	// Scene elements
 	this.ocean = new MyQuad(this,0,10,0,12);
+	this.submarine = new MySubmarine(this);
 
 	//Materials
 
@@ -150,6 +151,12 @@ LightingScene.prototype.display = function() {
 		this.rotate(-90 * degToRad, 1, 0, 0);
 		this.scale(15, 15, 0.2);
 		this.ocean.display();
+	this.popMatrix();
+
+	//submarine
+
+	this.pushMatrix();
+		this.submarine.display();
 	this.popMatrix();
 
 

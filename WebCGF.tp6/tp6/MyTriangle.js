@@ -1,17 +1,17 @@
 /**
- * MySubmarine
+ * MyTriangle
  * @constructor
  */
- function MySubmarine(scene) {
+ function MyTriangle(scene) {
  	CGFobject.call(this,scene);
 
  	this.initBuffers();
  };
 
- MySubmarine.prototype = Object.create(CGFobject.prototype);
- MySubmarine.prototype.constructor = MySubmarine;
+ MyTriangle.prototype = Object.create(CGFobject.prototype);
+ MyTriangle.prototype.constructor = MyTriangle;
 
- MySubmarine.prototype.initBuffers = function() {
+ MyTriangle.prototype.initBuffers = function() {
  	this.vertices = [
  	0.5, 0.3, 0,
  	-0.5, 0.3, 0,

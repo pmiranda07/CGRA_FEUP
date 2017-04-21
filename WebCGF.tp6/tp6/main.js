@@ -17,6 +17,8 @@ serialInclude([
 	'MyCylinderWithTops.js',
 	'MyClockHand.js',
 	'MyInterface.js',
+	'MySubmarine.js',
+	'MyTriangle.js',
 
 	
 
