@@ -32,6 +32,8 @@ LightingScene.prototype.init = function(application) {
 	// Scene elements
 	this.ocean = new MyQuad(this,0,10,0,12);
 	this.submarine = new MySubmarine(this);
+	this.cylinder = new MyCylinder(this,20,20);
+	this.clock = new MyClock(this);
 
 	//Materials
 
@@ -44,6 +46,15 @@ LightingScene.prototype.init = function(application) {
 	this.oceanAppearence.setShininess(10);
 	this.oceanAppearence.loadTexture("../resources/images/water.png");
 	this.oceanAppearence.setTextureWrap("REPEAT","REPEAT");
+
+	//marmore 
+
+	this.marmore = new CGFappearance(this);
+	this.marmore.setAmbient(0.3,0.3,0.3,1);
+	this.marmore.setDiffuse(0.7,0.7,0.7,1);
+	this.marmore.setSpecular(0.5,0.5,0.5,1);	
+	this.marmore.setShininess(120);
+	this.marmore.loadTexture("../resources/images/marmore.png");
 
 };
 
@@ -156,8 +167,28 @@ LightingScene.prototype.display = function() {
 	//submarine
 
 	this.pushMatrix();
+		this.translate(8,0,8);
+		this.rotate(180*degToRad,0,1,0);
 		this.submarine.display();
 	this.popMatrix();
+
+	//cylinder
+
+	this.marmore.apply();
+	this.pushMatrix()
+		this.rotate(-90 * degToRad, 1, 0, 0);
+		this.translate(8,0,0);
+		this.scale(0.2,0.2,5);
+		this.cylinder.display();
+	this.popMatrix();
+
+	//clock
+
+	this.pushMatrix();
+		this.translate(0.8,-2.2,-0.5);
+		this.scale(1,1,2);
+    	this.clock.display();
+    this.popMatrix();	
 
 
 	// ---- END Primitive drawing section
@@ -167,7 +198,7 @@ LightingScene.prototype.display = function() {
 
 LightingScene.prototype.update=function(currTime)
 {
-	//this.clock.update(currTime);
+	this.clock.update(currTime);
 };
 
 
