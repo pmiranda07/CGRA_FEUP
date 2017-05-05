@@ -16,8 +16,11 @@ LightingScene.prototype.init = function(application) {
 	this.initLights();
 	this.setUpdatePeriod(100);
 
-	this.option1=true;
-	this.option2=false;
+	this.Luz1=true;
+	this.Luz2=true;
+	this.Luz3=true;
+	this.Luz4=true;
+	this.Pausa=false;
 	this.speed=3;
 
 
@@ -31,7 +34,7 @@ LightingScene.prototype.init = function(application) {
 
 	// Scene elements
 	this.ocean = new MyQuad(this,0,10,0,12);
-	this.submarine = new MySubmarine(this);
+	this.submarine = new MySubmarine(this, 8, 0, 8, 180*degToRad);
 	this.cylinder = new MyCylinder(this,20,20);
 	this.clock = new MyClock(this);
 
@@ -167,8 +170,6 @@ LightingScene.prototype.display = function() {
 	//submarine
 
 	this.pushMatrix();
-		this.translate(8,0,8);
-		this.rotate(180*degToRad,0,1,0);
 		this.submarine.display();
 	this.popMatrix();
 
@@ -198,12 +199,37 @@ LightingScene.prototype.display = function() {
 
 LightingScene.prototype.update=function(currTime)
 {
-	this.clock.update(currTime);
+	this.submarine.update(currTime);
+	if (this.Luz1)
+		this.lights[0].enable();
+	else
+		this.lights[0].disable();
+	
+	if (this.Luz2)
+		this.lights[1].enable();
+	else
+		this.lights[1].disable();
+	
+	if (this.Luz3)
+		this.lights[2].enable();
+	else
+		this.lights[2].disable();
+	
+	if (this.Luz4)
+		this.lights[3].enable();
+	else
+		this.lights[3].disable();
+
+	
+	if (!this.Pausa)
+		this.clock.update(currTime);
+
+
 };
 
 
-LightingScene.prototype.doSomething = function ()
-{ 
+LightingScene.prototype.Options = function ()
+{
 	
 	console.log("Doing something..."); 
 
