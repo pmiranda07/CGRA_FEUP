@@ -170,6 +170,7 @@ LightingScene.prototype.display = function() {
 	//submarine
 
 	this.pushMatrix();
+		this.translate(-2,5,2);
 		this.submarine.display();
 	this.popMatrix();
 

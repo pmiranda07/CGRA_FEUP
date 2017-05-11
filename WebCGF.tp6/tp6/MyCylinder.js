@@ -24,61 +24,38 @@
  	* build a prism with varying number of slices and stacks?
  	*/
 
+	var t = Math.PI*2/this.slices;
+ 	var ang = 0;
 
-	var t = 2 * Math.PI/this.slices;
+ 	this.indices = [];
+ 	this.vertices = [];
+ 	this.normals = [];
+	this.texCoords = [];
+ 	verts = 0;
 
-	this.vertices=[];
-	this.normals=[];
-	this.indices=[];
-	this.texCoords =[];
-
-	for(let n = 0; n < this.stacks+1; n++)
+ 	for(j = 0; j <= this.stacks; j++)
 	{
-		var z = n/this.stacks;
+		this.vertices.push(1, 0, j / this.stacks);
+		this.normals.push(1, 0, 0);
+		this.texCoords.push(0,j / this.stacks);
+		verts += 1;
 
-		for(let i = 0; i < this.slices; i++)
+		for(i = 1; i <= this.slices; i++)
 		{
-			this.vertices.push(Math.cos(i * t),Math.sin(i * t), z);
-			this.normals.push(Math.cos(i * t),Math.sin(i * t), 0);
-		}
+			ang+=t;
+			x = Math.cos(ang);
+			y = Math.sin(ang);
+			this.vertices.push(x, y, j / this.stacks);
+			this.normals.push(x, y, 0);
+			this.texCoords.push(i / this.slices, j / this.stacks);
+			verts++;
 
-	}
-
-
-
-
-	for(let k = 0; k < this.stacks; k++)
-	{
-		for(let i = 0; i < this.slices; i++)
-		{
-			this.indices.push(this.slices*k+i,this.slices*k+i+1,this.slices*(k+1)+i);
-			if (i != (this.slices - 1)) 
+			if(j > 0 && i > 0)
 			{
-				this.indices.push(this.slices*(k+1)+i+1,this.slices*(k+1)+i,this.slices*k+i+1);
+				this.indices.push(verts-1, verts-2, verts-this.slices-2);
+				this.indices.push(verts-this.slices-3, verts-this.slices-2, verts-2);
 			}
-			else 
-			{
-				this.indices.push(this.slices*k,this.slices*k+i+1,this.slices*k+i);
-			}
-			
 		}
-
-	}
-
-// texture
-
-	var s = 0;
-	var t = 0;
-	var tn = 1/this.stacks;
-	var sn = 1/this.slices;
-
-	for(var i = 0; i <= this.stacks; i++){
-		for(var j = 0; j < this.slices; j++){
-			this.texCoords.push(s, t);
-			s += sn;
-		}
-		s = 0;
-		t += tn;
 	}
 
 // para testar na consola 

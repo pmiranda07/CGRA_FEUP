@@ -19,6 +19,9 @@ serialInclude([
 	'MyInterface.js',
 	'MySubmarine.js',
 	'MyTriangle.js',
+	'Trapezio.js',
+	'MyRudder.js',
+	'ReverseCylinder.js',
 
 	
 
