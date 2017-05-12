@@ -22,6 +22,17 @@ LightingScene.prototype.init = function(application) {
 	this.Luz4=true;
 	this.Pausa=false;
 	this.speed=3;
+	this.submarineAppearances = [];
+	this.submarineAppearances.push("../resources/images/rusty.png");
+	this.submarineAppearances.push("../resources/images/yellow.png");
+	this.submarineAppearances.push("../resources/images/military.png");
+	this.submarineAppearances.push("../resources/images/beatles.png");
+
+
+	this.currSubmarineAppearance = 'Militar';
+	this.submarineAppearanceList = [
+	'Militar', 'Beatles', 'Rusty'
+	];
 
 
 	this.gl.clearColor(0.0, 0.0, 1.0, 1.0);
@@ -50,14 +61,16 @@ LightingScene.prototype.init = function(application) {
 	this.oceanAppearence.loadTexture("../resources/images/water.png");
 	this.oceanAppearence.setTextureWrap("REPEAT","REPEAT");
 
-	//marmore 
+	//rusty 
 
-	this.marmore = new CGFappearance(this);
-	this.marmore.setAmbient(0.3,0.3,0.3,1);
-	this.marmore.setDiffuse(0.7,0.7,0.7,1);
-	this.marmore.setSpecular(0.5,0.5,0.5,1);	
-	this.marmore.setShininess(120);
-	this.marmore.loadTexture("../resources/images/marmore.png");
+	this.rusty = new CGFappearance(this);
+	this.rusty.setAmbient(0.3,0.3,0.3,1);
+	this.rusty.setDiffuse(0.7,0.7,0.7,1);
+	this.rusty.setSpecular(0.5,0.5,0.5,1);	
+	this.rusty.setShininess(120);
+	this.rusty.loadTexture("../resources/images/rusty.png");
+
+	
 
 };
 
@@ -159,8 +172,8 @@ LightingScene.prototype.display = function() {
 	// ---- BEGIN Primitive drawing section
 
 	//ocean
-	this.oceanAppearence.apply();
 	this.pushMatrix();
+		this.oceanAppearence.apply();
 		this.translate(7.5, 0, 7.5);
 		this.rotate(-90 * degToRad, 1, 0, 0);
 		this.scale(15, 15, 0.2);
@@ -169,15 +182,15 @@ LightingScene.prototype.display = function() {
 
 	//submarine
 
+	
 	this.pushMatrix();
-		this.translate(-2,5,2);
 		this.submarine.display();
 	this.popMatrix();
 
 	//cylinder
 
-	this.marmore.apply();
 	this.pushMatrix()
+		this.rusty.apply();
 		this.rotate(-90 * degToRad, 1, 0, 0);
 		this.translate(8,0,0);
 		this.scale(0.2,0.2,5);

@@ -23,6 +23,33 @@
  	this.z = z;
  	this.angulo = angulo;
 
+ 	//rusty 
+
+	this.rusty = new CGFappearance(this.scene);
+	this.rusty.setAmbient(0.3,0.3,0.3,1);
+	this.rusty.setDiffuse(0.7,0.7,0.7,1);
+	this.rusty.setSpecular(0.5,0.5,0.5,1);	
+	this.rusty.setShininess(120);
+	this.rusty.loadTexture(this.scene.submarineAppearances[0]);
+
+	//yellow
+
+	this.yellow = new CGFappearance(this.scene);
+	this.yellow.setAmbient(0.3,0.3,0.3,1);
+	this.yellow.setDiffuse(0.7,0.7,0.7,1);
+	this.yellow.setSpecular(0.5,0.5,0.5,1);	
+	this.yellow.setShininess(120);
+	this.yellow.loadTexture(this.scene.submarineAppearances[1]);
+
+	//militar
+
+	this.militar = new CGFappearance(this.scene);
+	this.militar.setAmbient(0.3,0.3,0.3,1);
+	this.militar.setDiffuse(0.7,0.7,0.7,1);
+	this.militar.setSpecular(0.5,0.5,0.5,1);	
+	this.militar.setShininess(120);
+	this.militar.loadTexture(this.scene.submarineAppearances[2]);
+
 
  };
 
@@ -30,39 +57,48 @@
  MySubmarine.prototype.constructor = MySubmarine;
 
  MySubmarine.prototype.display = function() {
+	
+	this.scene.pushMatrix();
+	if(this.scene.currSubmarineAppearance == 'Militar'){
+    	this.militar.apply();
+    }else if(this.scene.currSubmarineAppearance == 'Beatles'){
+    	this.yellow.apply();
+    }else if(this.scene.currSubmarineAppearance == 'Rusty'){
+    	this.rusty.apply();
+    }
+
+	this.scene.translate(this.x,0,this.z);
+ 	this.scene.rotate(this.angulo,0,1,0);
 
 
 	//Body
 
 	this.scene.pushMatrix();
- 	this.scene.translate(8, 0, 5);
  	this.scene.scale(0.75,1,5);
  	this.Body.display();
  	this.scene.popMatrix();
 
 	//nose
-
  	this.scene.pushMatrix();
- 	this.scene.rotate(180*degToRad,0,1,0);
- 	this.scene.translate(-8, 0, -5);
+ 	this.scene.translate(0, 0, 5);
  	this.scene.scale(0.75, 1, 1);
  	this.FrontTop.display();
  	this.scene.popMatrix();
 
 	//tail
-
+	
  	this.scene.pushMatrix();
- 	this.scene.translate(8, 0, 10);
+ 	this.scene.rotate(180*degToRad,0,1,0);
  	this.scene.scale(0.75, 1, 1);
  	this.BackTop.display();
  	this.scene.popMatrix();
 
 	//cabine
-	
+
  	this.scene.pushMatrix();
  	this.scene.rotate(90*degToRad,1,0,0);
- 	this.scene.translate(8, 7, -1.6);
- 	this.scene.scale(0.70,1.1,1.6);
+ 	this.scene.translate(0, 3.3, -1.6);
+ 	this.scene.scale(0.50,0.9,1.6);
  	this.Cabine.display();
  	this.scene.popMatrix();
 
@@ -70,8 +106,8 @@
 
  	this.scene.pushMatrix();
  	this.scene.rotate(-90*degToRad,1,0,0);
- 	this.scene.translate(8, -7, 1.6);
- 	this.scene.scale(0.70,1.1,1.61);
+ 	this.scene.translate(0, -3.3, 1.6);
+ 	this.scene.scale(0.50,0.9,1.6);
  	this.CabineTop.display();
  	this.scene.popMatrix();
 
@@ -79,20 +115,20 @@
 
  	this.scene.pushMatrix();
  	this.scene.rotate(90*degToRad,1,0,0);
- 	this.scene.translate(8, 6.5, -2.5);
+ 	this.scene.translate(0, 3.5, -2.5);
  	this.scene.scale(0.1,0.1,1);
  	this.Tube.display();
  	this.scene.popMatrix();
 
  	this.scene.pushMatrix();
- 	this.scene.translate(8, 2.4, 6.2);
+ 	this.scene.translate(0, 2.4, 3.5);
  	this.scene.scale(0.1,0.1,0.3);
  	this.Tube.display();
  	this.scene.popMatrix();
 
  	this.scene.pushMatrix();
  	this.scene.rotate(-90*degToRad,1,0,0);
- 	this.scene.translate(8., -6.5, 2.5);
+ 	this.scene.translate(0, -3.5, 2.5);
  	this.scene.scale(0.1,0.1,1);
  	this.TubeTop.display();
  	this.scene.popMatrix();
@@ -101,14 +137,14 @@
 
  	this.scene.pushMatrix();
  	this.scene.rotate(90*degToRad,0,0,1);
- 	this.scene.translate(-0.3, -6.87, 9.5);
+ 	this.scene.translate(-0.5, 1, 0);
  	this.scene.scale(0.4,0.4,0.4);
  	this.Helice.display();
  	this.scene.popMatrix();
 
  	this.scene.pushMatrix();
  	this.scene.rotate(90*degToRad,0,0,1);
- 	this.scene.translate(-0.3, -9.13, 9.5);
+ 	this.scene.translate(-0.5, -1, 0);
  	this.scene.scale(0.4,0.4,0.4);
  	this.Helice.display();
  	this.scene.popMatrix();
@@ -119,35 +155,35 @@
 	//Esfera lado direito
 
  	this.scene.pushMatrix();
- 	this.scene.translate(6.86,-0.32,9.75);
+ 	this.scene.translate(1,-0.5,0.2);
  	this.scene.scale(0.1,0.1,0.1);
  	this.Sphere.display();
  	this.scene.popMatrix();
 
  	this.scene.pushMatrix();
  	this.scene.rotate(180*degToRad,1,0,0);
- 	this.scene.translate(6.86,0.32,-9.75);
+ 	this.scene.translate(1,0.5,-0.2);
  	this.scene.scale(0.1,0.1,0.1);
  	this.Sphere.display();
  	this.scene.popMatrix();
 
 	//Esfera lado esquerdo
     this.scene.pushMatrix();
- 	this.scene.translate(9.15,-0.32,9.75);
+ 	this.scene.translate(-1,-0.5,0.2);
  	this.scene.scale(0.1,0.1,0.1);
  	this.Sphere.display();
  	this.scene.popMatrix();
 
  	this.scene.pushMatrix();
  	this.scene.rotate(180*degToRad,1,0,0);
- 	this.scene.translate(9.15,0.32,-9.75);
+ 	this.scene.translate(-1,0.5,-0.2);
  	this.scene.scale(0.1,0.1,0.1);
  	this.Sphere.display();
  	this.scene.popMatrix(); 
 
 	//turbina Direita
  	this.scene.pushMatrix();
- 	this.scene.translate(6.85,-0.32,9.745);
+ 	this.scene.translate(1,-0.5,0.2);
  	this.scene.rotate(90*degToRad,0,1,0);
  	this.scene.scale(0.08,0.1,0.7);
  	this.turbine.display();
@@ -155,7 +191,7 @@
 
  	//turbina Esquerda
  	this.scene.pushMatrix();
- 	this.scene.translate(9.14,-0.32,9.745);
+ 	this.scene.translate(-1,-0.5,0.2);
  	this.scene.rotate(90*degToRad,0,1,0);
  	this.scene.scale(0.08,0.1,0.7);
  	this.turbine.display();
@@ -165,9 +201,9 @@
  	//vertical rudder
 
 	this.scene.pushMatrix();
-	this.scene.translate(8,0,10.5);
+	this.scene.translate(0,0,-0.5);
 	this.scene.rotate(90*degToRad,0,0,1);
-	this.scene.rotate(-90*degToRad,1,0,0);
+	this.scene.rotate(90*degToRad,1,0,0);
 	this.scene.scale(2,0.5,0.2);
 	this.rudder.display();
 	this.scene.popMatrix();
@@ -175,8 +211,8 @@
 	//horizontal back rudder
 
 	this.scene.pushMatrix();
-	this.scene.translate(8,0,10.5);
-	this.scene.rotate(-90*degToRad,1,0,0);
+	this.scene.translate(0,0,-0.5);
+	this.scene.rotate(90*degToRad,1,0,0);
 	this.scene.scale(2,0.5,0.2);
 	this.rudder.display();
 	this.scene.popMatrix();
@@ -184,17 +220,17 @@
 	//horizontal cabine rudder
 
 	this.scene.pushMatrix();
-	this.scene.translate(8,1.1,7);
-	this.scene.rotate(-90*degToRad,1,0,0);
+	this.scene.translate(0,1.2,3.4);
+	this.scene.rotate(90*degToRad,1,0,0);
 	this.scene.scale(2,0.5,0.2);
 	this.rudder.display();
 	this.scene.popMatrix();
 
-	//reverseHelice Direita
+	//reverseHelice esqueda
 
 	this.scene.pushMatrix();
  	this.scene.rotate(90*degToRad,0,0,1);
- 	this.scene.translate(-0.3, -6.87, 9.5);
+ 	this.scene.translate(-0.5, 1, 0);
  	this.scene.scale(0.4,0.4,0.4);
  	this.reverseHelice.display();
  	this.scene.popMatrix();
@@ -203,11 +239,12 @@
 
 	this.scene.pushMatrix();
  	this.scene.rotate(90*degToRad,0,0,1);
- 	this.scene.translate(-0.3, -9.13, 9.5);
+ 	this.scene.translate(-0.5, -1, 0);
  	this.scene.scale(0.4,0.4,0.4);
  	this.reverseHelice.display();
  	this.scene.popMatrix();
 
+this.scene.popMatrix();
 
 
  }
