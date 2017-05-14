@@ -105,3 +105,26 @@ MyInterface.prototype.processKeyboard = function(event) {
 				break;
 	};
 };
+
+MyInterface.prototype.processKeyUp = function(event) {
+
+	CGFinterface.prototype.processKeyboard.call(this,event);
+
+	switch (event.keyCode)
+	{
+		case (65): //A
+				this.scene.submarine.restartRudder();
+				break;
+		case (97): //a
+				this.scene.submarine.restartRudder();
+				break;
+		case (100): //d
+				this.scene.submarine.restartRudder();
+				break;
+		case (68): //D 
+				this.scene.submarine.restartRudder();
+				break;
+		
+	};
+
+};

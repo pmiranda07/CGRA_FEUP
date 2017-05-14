@@ -26,7 +26,6 @@ LightingScene.prototype.init = function(application) {
 	this.submarineAppearances.push("../resources/images/rusty.png");
 	this.submarineAppearances.push("../resources/images/yellow.png");
 	this.submarineAppearances.push("../resources/images/military.png");
-	this.submarineAppearances.push("../resources/images/beatles.png");
 
 
 	this.currSubmarineAppearance = 'Militar';

@@ -22,6 +22,10 @@
  	this.x = x;
  	this.z = z;
  	this.angulo = angulo;
+ 	this.speed = 0
+ 	this.vertical_rudder=0;
+ 	this.rotacao=0;
+ 	this.inc=0;
 
  	//rusty 
 
@@ -184,6 +188,7 @@
 	//turbina Direita
  	this.scene.pushMatrix();
  	this.scene.translate(1,-0.5,0.2);
+ 	this.scene.rotate(this.rotacao*25*degToRad,0,0,1);
  	this.scene.rotate(90*degToRad,0,1,0);
  	this.scene.scale(0.08,0.1,0.7);
  	this.turbine.display();
@@ -192,6 +197,7 @@
  	//turbina Esquerda
  	this.scene.pushMatrix();
  	this.scene.translate(-1,-0.5,0.2);
+ 	this.scene.rotate(this.rotacao*-25*degToRad,0,0,1);
  	this.scene.rotate(90*degToRad,0,1,0);
  	this.scene.scale(0.08,0.1,0.7);
  	this.turbine.display();
@@ -202,6 +208,7 @@
 
 	this.scene.pushMatrix();
 	this.scene.translate(0,0,-0.5);
+	this.scene.rotate(this.vertical_rudder*degToRad,0,1,0);
 	this.scene.rotate(90*degToRad,0,0,1);
 	this.scene.rotate(90*degToRad,1,0,0);
 	this.scene.scale(2,0.5,0.2);
@@ -235,7 +242,7 @@
  	this.reverseHelice.display();
  	this.scene.popMatrix();
 
- 	//reverseHelice esquerda
+ 	//reverseHelice direita
 
 	this.scene.pushMatrix();
  	this.scene.rotate(90*degToRad,0,0,1);
@@ -251,44 +258,64 @@ this.scene.popMatrix();
 
 MySubmarine.prototype.updateRotation = function(Dir) {
 
-	switch(Dir)
-	{
-	  case(0):
-		this.angulo += 90*degToRad;
-		break;
-	  case(1):
-		this.angulo -= 90*degToRad;
-		break;
-	}
+	
+	  if(this.speed >= 0 && Dir == 0)
+	  {
+		this.angulo += 5*degToRad;
+		this.vertical_rudder = -25;
+	  }
+	  if(this.speed >= 0 && Dir == 1)
+	  {
+		this.angulo -= 5*degToRad;
+		this.vertical_rudder = 25;
+	  }
+	  if(this.speed < 0 && Dir == 0){
+		this.angulo += 5*degToRad;
+		this.vertical_rudder = 25;
+	  }
+	  if(this.speed < 0 && Dir == 1){
+		this.angulo -= 5*degToRad;
+		this.vertical_rudder = -25;
+	  }
+		
 };
 
 MySubmarine.prototype.updateMov = function(Dir) {
 
-        if((Math.cos(this.angulo) == -1) && Dir == 0)
-          this.z -= 1;
-        else if((Math.cos(this.angulo) == -1) && Dir == 1)
-          this.z += 1;
-        else if((Math.cos(this.angulo) == 1)&& Dir == 0)
-          this.z += 1;
-        else if((Math.cos(this.angulo) == 1)&& Dir == 1)
-          this.z -= 1;
-        else if((Math.sin(this.angulo) == 1) && Dir == 0)
-          this.x += 1;
-        else if((Math.sin(this.angulo) == 1) && Dir == 1)
-          this.x -= 1;
-        else if ((Math.sin(this.angulo) == -1) && Dir == 0)
-          this.x -= 1;
-        else if((Math.sin(this.angulo) == -1) && Dir == 1)
-          this.x += 1;
+    switch(Dir)
+    {
+      case 0:
+        this.speed+=0.2;
+        this.inc +=1;
+        break;
+      case 1:
+        this.speed-=0.2;
+        this.inc -=1;
+        break;
+    }
          
 }
 
 
 MySubmarine.prototype.update = function(currTime) {
-    this.reposition(this.x,this.z,this.angulo);
+   
+	this.x+=this.speed*Math.sin(this.angulo);
+	this.z+=this.speed*Math.cos(this.angulo);
+	this.RotacaoHelice();
+
+
 }
 
-MySubmarine.prototype.reposition = function(x,z,angulo) {
-    this.scene.translate(x, 0, z);
-    this.scene.rotate(angulo, 0,1,0);
+MySubmarine.prototype.restartRudder = function() {
+   
+
+        this.vertical_rudder=0;
+
 }
+MySubmarine.prototype.RotacaoHelice = function() {
+   
+   		this.rotacao += (this.inc * 1);
+
+
+}
+
