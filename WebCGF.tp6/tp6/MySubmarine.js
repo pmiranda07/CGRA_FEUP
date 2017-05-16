@@ -60,9 +60,9 @@
 
 	this.windowAppearance = new CGFappearance(this.scene);
 	this.windowAppearance.setAmbient(0.3,0.3,0.3,1);
-	this.windowAppearance.setDiffuse(0.3,0.3,0.3,1);
+	this.windowAppearance.setDiffuse(0.5,0.5,0.5,1);
 	this.windowAppearance.setSpecular(0.5,0.5,0.5,1);	
-	this.windowAppearance.setShininess(10);
+	this.windowAppearance.setShininess(50);
 	this.windowAppearance.loadTexture(this.scene.submarineAppearances[3]);
 
 	//white

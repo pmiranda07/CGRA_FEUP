@@ -22,6 +22,7 @@ serialInclude([
 	'Trapezio.js',
 	'MyRudder.js',
 	'ReverseCylinder.js',
+	'MyTarget.js',
 
 	
 

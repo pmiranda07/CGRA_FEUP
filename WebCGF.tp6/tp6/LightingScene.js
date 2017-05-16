@@ -52,6 +52,7 @@ LightingScene.prototype.init = function(application) {
 	this.submarine = new MySubmarine(this, 8, 2, 8, 180*degToRad);
 	this.cylinder = new MyCylinder(this,20,20);
 	this.clock = new MyClock(this);
+	this.target= new MyTarget(this,0,0,0);
 
 	//Materials
 
@@ -99,15 +100,13 @@ LightingScene.prototype.initLights = function() {
 	this.lights[3].setPosition(0, 10.0, 15, 1.0);
 	this.lights[3].setVisible(false);
 
-	this.lights[4].setPosition(8,5,1,1);
-	this.lights[4].setVisible(false);
 
 	this.lights[0].setAmbient(0.3, 0.3, 0.3, 1);
 	this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
 	this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
 	this.lights[0].setLinearAttenuation(0);
 	this.lights[0].setConstantAttenuation(1);
-	this.lights[0].setQuadraticAttenuation(0);
+	this.lights[0].setQuadraticAttenuation(1);
 	this.lights[0].enable();
 
 	this.lights[1].setAmbient(0.3, 0.3, 0.3, 1);
@@ -131,16 +130,10 @@ LightingScene.prototype.initLights = function() {
 	this.lights[3].setSpecular(1.0, 1.0, 1.0, 1.0);
 	this.lights[3].setLinearAttenuation(0);
 	this.lights[3].setConstantAttenuation(1);
-	this.lights[3].setQuadraticAttenuation(0);
+	this.lights[3].setQuadraticAttenuation(1);
 	this.lights[3].enable();
 
-	this.lights[4].setAmbient(0, 0, 0, 1);
-	this.lights[4].setDiffuse(1.0, 1.0, 1.0, 1.0);
-	this.lights[4].setSpecular(1.0, 1.0, 1.0, 1.0);
-	this.lights[4].setLinearAttenuation(0);
-	this.lights[4].setConstantAttenuation(1);
-	this.lights[4].setQuadraticAttenuation(0);
-	this.lights[4].enable();
+
 
 };
 
@@ -215,6 +208,11 @@ LightingScene.prototype.display = function() {
 		this.scale(1,1,2);
     	this.clock.display();
     this.popMatrix();	
+
+    //target
+    this.pushMatrix();
+    	this.target.display();
+    this.popMatrix();
 
 
 	// ---- END Primitive drawing section
