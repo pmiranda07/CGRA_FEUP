@@ -33,6 +33,7 @@ LightingScene.prototype.init = function(application) {
 	this.submarineAppearances.push("../resources/images/ringo.png");
 	this.submarineAppearances.push("../resources/images/george.png");
 
+
 	this.currSubmarineAppearance = 'Militar';
 	this.submarineAppearanceList = [
 	'Militar', 'Beatles', 'Rusty'
@@ -52,7 +53,14 @@ LightingScene.prototype.init = function(application) {
 	this.submarine = new MySubmarine(this, 8, 2, 8, 180*degToRad);
 	this.cylinder = new MyCylinder(this,20,20);
 	this.clock = new MyClock(this);
-	this.target= new MyTarget(this,0,0,0);
+	this.target1= new MyTarget(this,0,3,0);
+	this.target2= new MyTarget(this,6,5,-5);
+	this.target3= new MyTarget(this,-6,4,-1);
+
+	this.targetList = [];
+	this.targetList.push(this.target1);
+	this.targetList.push(this.target2);
+	this.targetList.push(this.target3);
 
 	//Materials
 
@@ -209,9 +217,17 @@ LightingScene.prototype.display = function() {
     	this.clock.display();
     this.popMatrix();	
 
-    //target
+	//targets
+	this.pushMatrix();
+		this.targetList[0].display();
+    this.popMatrix();
+
     this.pushMatrix();
-    	this.target.display();
+		this.targetList[1].display();
+    this.popMatrix();
+
+    this.pushMatrix();
+		this.targetList[2].display();
     this.popMatrix();
 
 
