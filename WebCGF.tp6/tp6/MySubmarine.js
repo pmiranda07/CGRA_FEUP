@@ -18,14 +18,16 @@
     this.TubeTop = new MyCircle(this.scene,20);
     this.rudder= new MyRudder(this.scene);
     this.reverseHelice = new ReverseCylinder(this.scene,20,10);
+    this.window = new MyCircle(this.scene,20);
 
  	this.x = x;
  	this.z = z;
+ 	this.y = y;
  	this.angulo = angulo;
- 	this.speed = 0
  	this.vertical_rudder=0;
  	this.rotacao=0;
- 	this.inc=0;
+ 	this.h_rudder=0;
+ 	this.per = 0;
 
  	//rusty 
 
@@ -40,7 +42,7 @@
 
 	this.yellow = new CGFappearance(this.scene);
 	this.yellow.setAmbient(0.3,0.3,0.3,1);
-	this.yellow.setDiffuse(0.7,0.7,0.7,1);
+	this.yellow.setDiffuse(0.4,0.4,0.4,1);
 	this.yellow.setSpecular(0.5,0.5,0.5,1);	
 	this.yellow.setShininess(120);
 	this.yellow.loadTexture(this.scene.submarineAppearances[1]);
@@ -53,6 +55,60 @@
 	this.militar.setSpecular(0.5,0.5,0.5,1);	
 	this.militar.setShininess(120);
 	this.militar.loadTexture(this.scene.submarineAppearances[2]);
+
+	//windows
+
+	this.windowAppearance = new CGFappearance(this.scene);
+	this.windowAppearance.setAmbient(0.3,0.3,0.3,1);
+	this.windowAppearance.setDiffuse(0.3,0.3,0.3,1);
+	this.windowAppearance.setSpecular(0.5,0.5,0.5,1);	
+	this.windowAppearance.setShininess(10);
+	this.windowAppearance.loadTexture(this.scene.submarineAppearances[3]);
+
+	//white
+
+	this.white = new CGFappearance(this.scene);
+	this.white.setAmbient(0.3,0.3,0.3,1);
+	this.white.setDiffuse(0.5,0.5,0.5,1);
+	this.white.setSpecular(0.5,0.5,0.5,1);	
+	this.white.setShininess(100);
+	this.white.loadTexture(this.scene.submarineAppearances[4]);
+
+	//lenon
+
+	this.lenon = new CGFappearance(this.scene);
+	this.lenon.setAmbient(0.3,0.3,0.3,1);
+	this.lenon.setDiffuse(0.7,0.7,0.7,1);
+	this.lenon.setSpecular(0.5,0.5,0.5,1);	
+	this.lenon.setShininess(120);
+	this.lenon.loadTexture(this.scene.submarineAppearances[5]);
+
+	//paul
+
+	this.paul = new CGFappearance(this.scene);
+	this.paul.setAmbient(0.3,0.3,0.3,1);
+	this.paul.setDiffuse(0.7,0.7,0.7,1);
+	this.paul.setSpecular(0.5,0.5,0.5,1);	
+	this.paul.setShininess(120);
+	this.paul.loadTexture(this.scene.submarineAppearances[6]);
+
+	//ringo
+
+	this.ringo = new CGFappearance(this.scene);
+	this.ringo.setAmbient(0.3,0.3,0.3,1);
+	this.ringo.setDiffuse(0.7,0.7,0.7,1);
+	this.ringo.setSpecular(0.5,0.5,0.5,1);	
+	this.ringo.setShininess(120);
+	this.ringo.loadTexture(this.scene.submarineAppearances[7]);
+
+	//george
+
+	this.george = new CGFappearance(this.scene);
+	this.george.setAmbient(0.3,0.3,0.3,1);
+	this.george.setDiffuse(0.7,0.7,0.7,1);
+	this.george.setSpecular(0.5,0.5,0.5,1);	
+	this.george.setShininess(120);
+	this.george.loadTexture(this.scene.submarineAppearances[8]);
 
 
  };
@@ -71,7 +127,7 @@
     	this.rusty.apply();
     }
 
-	this.scene.translate(this.x,0,this.z);
+	this.scene.translate(this.x,this.y,this.z);
  	this.scene.rotate(this.angulo,0,1,0);
 
 
@@ -98,7 +154,9 @@
  	this.scene.popMatrix();
 
 	//cabine
-
+ 	if(this.scene.currSubmarineAppearance == 'Beatles'){
+    	this.white.apply();
+    }
  	this.scene.pushMatrix();
  	this.scene.rotate(90*degToRad,1,0,0);
  	this.scene.translate(0, 3.3, -1.6);
@@ -116,7 +174,8 @@
  	this.scene.popMatrix();
 
 	//periscopio
-
+  this.scene.pushMatrix();
+   this.scene.translate(0,this.per,0);
  	this.scene.pushMatrix();
  	this.scene.rotate(90*degToRad,1,0,0);
  	this.scene.translate(0, 3.5, -2.5);
@@ -136,8 +195,13 @@
  	this.scene.scale(0.1,0.1,1);
  	this.TubeTop.display();
  	this.scene.popMatrix();
+   this.scene.popMatrix();
 
 //helice
+
+	if(this.scene.currSubmarineAppearance == 'Beatles'){
+    	this.yellow.apply();
+    }
 
  	this.scene.pushMatrix();
  	this.scene.rotate(90*degToRad,0,0,1);
@@ -186,6 +250,10 @@
  	this.scene.popMatrix(); 
 
 	//turbina Direita
+
+	if(this.scene.currSubmarineAppearance == 'Beatles'){
+    	this.white.apply();
+    }
  	this.scene.pushMatrix();
  	this.scene.translate(1,-0.5,0.2);
  	this.scene.rotate(this.rotacao*25*degToRad,0,0,1);
@@ -206,6 +274,9 @@
 
  	//vertical rudder
 
+	if(this.scene.currSubmarineAppearance == 'Beatles'){
+    	this.yellow.apply();
+    }
 	this.scene.pushMatrix();
 	this.scene.translate(0,0,-0.5);
 	this.scene.rotate(this.vertical_rudder*degToRad,0,1,0);
@@ -219,6 +290,7 @@
 
 	this.scene.pushMatrix();
 	this.scene.translate(0,0,-0.5);
+	this.scene.rotate(this.h_rudder*degToRad,1,0,0);
 	this.scene.rotate(90*degToRad,1,0,0);
 	this.scene.scale(2,0.5,0.2);
 	this.rudder.display();
@@ -227,7 +299,11 @@
 	//horizontal cabine rudder
 
 	this.scene.pushMatrix();
+	if(this.scene.currSubmarineAppearance == 'Beatles'){
+    	this.white.apply();
+    }
 	this.scene.translate(0,1.2,3.4);
+	this.scene.rotate(this.h_rudder*degToRad,1,0,0);
 	this.scene.rotate(90*degToRad,1,0,0);
 	this.scene.scale(2,0.5,0.2);
 	this.rudder.display();
@@ -235,6 +311,9 @@
 
 	//reverseHelice esqueda
 
+	if(this.scene.currSubmarineAppearance == 'Beatles'){
+    	this.yellow.apply();
+    }
 	this.scene.pushMatrix();
  	this.scene.rotate(90*degToRad,0,0,1);
  	this.scene.translate(-0.5, 1, 0);
@@ -251,6 +330,102 @@
  	this.reverseHelice.display();
  	this.scene.popMatrix();
 
+ 	//windows tubes
+
+ 	//back right
+ 	this.scene.pushMatrix();
+ 	this.scene.rotate(-90*degToRad,0,1,0);
+ 	this.scene.translate(1.5,0.1,0.4);
+ 	this.scene.scale(0.5,0.5,0.5);
+ 	this.Tube.display();
+ 	this.scene.popMatrix();
+
+ 	//front right
+
+ 	this.scene.pushMatrix();
+ 	this.scene.rotate(-90*degToRad,0,1,0);
+ 	this.scene.translate(3.5,0.1,0.4);
+ 	this.scene.scale(0.5,0.5,0.5);
+ 	this.Tube.display();
+ 	this.scene.popMatrix();
+
+ 	//front left
+	
+	this.scene.pushMatrix();
+ 	this.scene.rotate(-90*degToRad,0,1,0);
+ 	this.scene.translate(3.5,0.1,-0.9);
+ 	this.scene.scale(0.5,0.5,0.5);
+ 	this.Tube.display();
+ 	this.scene.popMatrix();
+
+ 	//back left
+
+ 	this.scene.pushMatrix();
+ 	this.scene.rotate(-90*degToRad,0,1,0);
+ 	this.scene.translate(1.5,0.1,-0.9);
+ 	this.scene.scale(0.5,0.5,0.5);
+ 	this.Tube.display();
+ 	this.scene.popMatrix();
+
+
+	//windows top
+  this.scene.pushMatrix();
+
+	if(this.scene.currSubmarineAppearance == 'Militar'){
+    	this.windowAppearance.apply();
+    }else if(this.scene.currSubmarineAppearance == 'Beatles'){
+    	this.lenon.apply();
+    }else if(this.scene.currSubmarineAppearance == 'Rusty'){
+    	this.windowAppearance.apply();
+    }
+
+	//back right
+ 	this.scene.pushMatrix();
+ 	this.scene.rotate(-90*degToRad,0,1,0);
+ 	this.scene.translate(1.5,0.1,0.9);
+ 	this.scene.scale(0.5,0.5,0.5);
+ 	this.window.display();
+ 	this.scene.popMatrix();
+
+	//front right
+ 	this.scene.pushMatrix();
+ 	if(this.scene.currSubmarineAppearance == 'Beatles'){
+    	this.paul.apply();
+    }
+ 	this.scene.rotate(-90*degToRad,0,1,0);
+ 	this.scene.translate(3.5,0.1,0.9);
+ 	this.scene.scale(0.5,0.5,0.5);
+ 	this.window.display();
+ 	this.scene.popMatrix();
+
+ 	//front left
+
+	this.scene.pushMatrix();
+	if(this.scene.currSubmarineAppearance == 'Beatles'){
+    	this.ringo.apply();
+    }
+ 	this.scene.rotate(90*degToRad,0,1,0);
+ 	this.scene.translate(-3.5,0.1,0.9);
+ 	this.scene.scale(0.5,0.5,0.5);
+ 	this.window.display();
+ 	this.scene.popMatrix();
+
+	//back left
+
+ 	this.scene.pushMatrix();
+ 	if(this.scene.currSubmarineAppearance == 'Beatles'){
+    	this.george.apply();
+    }
+ 	this.scene.rotate(90*degToRad,0,1,0);
+ 	this.scene.translate(-1.5,0.1,0.9);
+ 	this.scene.scale(0.5,0.5,0.5);
+ 	this.window.display();
+ 	this.scene.popMatrix();
+
+
+  this.scene.popMatrix();
+
+
 this.scene.popMatrix();
 
 
@@ -259,21 +434,21 @@ this.scene.popMatrix();
 MySubmarine.prototype.updateRotation = function(Dir) {
 
 	
-	  if(this.speed >= 0 && Dir == 0)
+	  if(this.scene.speed >= 0 && Dir == 0)
 	  {
 		this.angulo += 5*degToRad;
 		this.vertical_rudder = -25;
 	  }
-	  if(this.speed >= 0 && Dir == 1)
+	  if(this.scene.speed >= 0 && Dir == 1)
 	  {
 		this.angulo -= 5*degToRad;
 		this.vertical_rudder = 25;
 	  }
-	  if(this.speed < 0 && Dir == 0){
+	  if(this.scene.speed < 0 && Dir == 0){
 		this.angulo += 5*degToRad;
 		this.vertical_rudder = 25;
 	  }
-	  if(this.speed < 0 && Dir == 1){
+	  if(this.scene.speed < 0 && Dir == 1){
 		this.angulo -= 5*degToRad;
 		this.vertical_rudder = -25;
 	  }
@@ -285,12 +460,10 @@ MySubmarine.prototype.updateMov = function(Dir) {
     switch(Dir)
     {
       case 0:
-        this.speed+=0.2;
-        this.inc +=1;
+        this.scene.speed+=0.1;
         break;
       case 1:
-        this.speed-=0.2;
-        this.inc -=1;
+        this.scene.speed-=0.1;
         break;
     }
          
@@ -299,10 +472,9 @@ MySubmarine.prototype.updateMov = function(Dir) {
 
 MySubmarine.prototype.update = function(currTime) {
    
-	this.x+=this.speed*Math.sin(this.angulo);
-	this.z+=this.speed*Math.cos(this.angulo);
-	this.RotacaoHelice();
-
+	this.x+=this.scene.speed*Math.sin(this.angulo);
+	this.z+=this.scene.speed*Math.cos(this.angulo);
+	this.rotacao += 36*degToRad*this.scene.speed;
 
 }
 
@@ -312,10 +484,43 @@ MySubmarine.prototype.restartRudder = function() {
         this.vertical_rudder=0;
 
 }
-MySubmarine.prototype.RotacaoHelice = function() {
-   
-   		this.rotacao += (this.inc * 1);
 
+MySubmarine.prototype.updateDeep = function(Dir)
+{
+	if(this.y >= 2 && Dir == 0 && this.scene.speed >=0){
+        this.y +=0.5
+        this.h_rudder = -25;
+       }
+    if(this.y > 2 && Dir == 1 && this.scene.speed >=0){
+        this.y -=0.5
+        this.h_rudder = 25;
+    }
+    if(this.y >= 2 && Dir == 0 && this.scene.speed < 0){
+        this.y +=0.5
+        this.h_rudder = 25;
+       }
+    if(this.y > 2 && Dir == 1 && this.scene.speed < 0){
+        this.y -=0.5
+        this.h_rudder = -25;
+    }
+    
 
 }
 
+MySubmarine.prototype.restartHRudder = function() {
+   
+
+        this.h_rudder=0;
+
+}
+
+MySubmarine.prototype.updatePer = function(Dir)
+{
+	if(this.per >= -0.7 && this.per <= 0 && Dir == 0){
+        this.per += 0.1
+       }
+    if(this.per >= -0.6 && this.per <= 0.1 && Dir == 1){
+       this.per -= 0.1
+    }
+
+}

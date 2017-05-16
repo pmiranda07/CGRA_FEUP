@@ -21,12 +21,17 @@ LightingScene.prototype.init = function(application) {
 	this.Luz3=true;
 	this.Luz4=true;
 	this.Pausa=false;
-	this.speed=3;
+	this.speed=0;
 	this.submarineAppearances = [];
 	this.submarineAppearances.push("../resources/images/rusty.png");
 	this.submarineAppearances.push("../resources/images/yellow.png");
 	this.submarineAppearances.push("../resources/images/military.png");
-
+	this.submarineAppearances.push("../resources/images/window.png");
+	this.submarineAppearances.push("../resources/images/white.png");
+	this.submarineAppearances.push("../resources/images/lenon.png");
+	this.submarineAppearances.push("../resources/images/paul.png");
+	this.submarineAppearances.push("../resources/images/ringo.png");
+	this.submarineAppearances.push("../resources/images/george.png");
 
 	this.currSubmarineAppearance = 'Militar';
 	this.submarineAppearanceList = [
@@ -43,8 +48,8 @@ LightingScene.prototype.init = function(application) {
 	this.axis = new CGFaxis(this);
 
 	// Scene elements
-	this.ocean = new MyQuad(this,0,10,0,12);
-	this.submarine = new MySubmarine(this, 8, 0, 8, 180*degToRad);
+	this.ocean = new MyQuad(this,0,10,0,10);
+	this.submarine = new MySubmarine(this, 8, 2, 8, 180*degToRad);
 	this.cylinder = new MyCylinder(this,20,20);
 	this.clock = new MyClock(this);
 
@@ -56,8 +61,8 @@ LightingScene.prototype.init = function(application) {
   	this.oceanAppearence.setAmbient(0.3,0.3,0.3,1);
 	this.oceanAppearence.setDiffuse(0.8,0.8,0.8,1);
 	this.oceanAppearence.setSpecular(0.2,0.2,0.2,1);
-	this.oceanAppearence.setShininess(10);
-	this.oceanAppearence.loadTexture("../resources/images/water.png");
+	this.oceanAppearence.setShininess(60);
+	this.oceanAppearence.loadTexture("../resources/images/areia.png");
 	this.oceanAppearence.setTextureWrap("REPEAT","REPEAT");
 
 	//rusty 
@@ -81,36 +86,43 @@ LightingScene.prototype.initLights = function() {
 	this.setGlobalAmbientLight(0,0,0, 1.0);
 	
 	// Positions for four lights
-	this.lights[0].setPosition(4, 6, 1, 1);
-	this.lights[0].setVisible(true); // show marker on light position (different from enabled)
+	this.lights[0].setPosition(0, 10, 0, 1);
+	this.lights[0].setVisible(false); // show marker on light position (different from enabled)
 	
-	this.lights[1].setPosition(10.5, 6.0, 1.0, 1.0);
-	this.lights[1].setVisible(true); // show marker on light position (different from enabled)
+	this.lights[1].setPosition(15, 10.0, 0, 1.0);
+	this.lights[1].setVisible(false); // show marker on light position (different from enabled)
 
-	this.lights[2].setPosition(10.5, 6.0, 5.0, 1.0);
-	this.lights[2].setVisible(true);
+	this.lights[2].setPosition(15, 10.0, 15, 1.0);
+	this.lights[2].setVisible(false);
 
 	
-	this.lights[3].setPosition(4, 6.0, 5.0, 1.0);
-	this.lights[3].setVisible(true);
+	this.lights[3].setPosition(0, 10.0, 15, 1.0);
+	this.lights[3].setVisible(false);
 
-	this.lights[4].setPosition(0.1,4.5,6.5,1);
+	this.lights[4].setPosition(8,5,1,1);
 	this.lights[4].setVisible(false);
 
 	this.lights[0].setAmbient(0.3, 0.3, 0.3, 1);
 	this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
 	this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
+	this.lights[0].setLinearAttenuation(0);
+	this.lights[0].setConstantAttenuation(1);
+	this.lights[0].setQuadraticAttenuation(0);
 	this.lights[0].enable();
 
-	this.lights[1].setAmbient(0, 0, 0, 1);
+	this.lights[1].setAmbient(0.3, 0.3, 0.3, 1);
 	this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
+	this.lights[1].setSpecular(1.0, 1.0, 1.0, 1.0);
+	this.lights[1].setLinearAttenuation(0);
+	this.lights[1].setConstantAttenuation(1);
+	this.lights[1].setQuadraticAttenuation(0);
 	this.lights[1].enable();
 
-	this.lights[2].setAmbient(0, 0, 0, 1);
+	this.lights[2].setAmbient(0.3, 0.3, 0.3, 1);
 	this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
 	this.lights[2].setSpecular(1.0, 1.0, 1.0, 1.0);
-	this.lights[2].setLinearAttenuation(1);
-	this.lights[2].setConstantAttenuation(0);
+	this.lights[2].setLinearAttenuation(0);
+	this.lights[2].setConstantAttenuation(1);
 	this.lights[2].setQuadraticAttenuation(0);
 	this.lights[2].enable();
 
@@ -118,16 +130,16 @@ LightingScene.prototype.initLights = function() {
 	this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0);
 	this.lights[3].setSpecular(1.0, 1.0, 1.0, 1.0);
 	this.lights[3].setLinearAttenuation(0);
-	this.lights[3].setConstantAttenuation(0);
-	this.lights[3].setQuadraticAttenuation(1);
+	this.lights[3].setConstantAttenuation(1);
+	this.lights[3].setQuadraticAttenuation(0);
 	this.lights[3].enable();
 
 	this.lights[4].setAmbient(0, 0, 0, 1);
 	this.lights[4].setDiffuse(1.0, 1.0, 1.0, 1.0);
 	this.lights[4].setSpecular(1.0, 1.0, 1.0, 1.0);
 	this.lights[4].setLinearAttenuation(0);
-	this.lights[4].setConstantAttenuation(0);
-	this.lights[4].setQuadraticAttenuation(1);
+	this.lights[4].setConstantAttenuation(1);
+	this.lights[4].setQuadraticAttenuation(0);
 	this.lights[4].enable();
 
 };
@@ -175,7 +187,7 @@ LightingScene.prototype.display = function() {
 		this.oceanAppearence.apply();
 		this.translate(7.5, 0, 7.5);
 		this.rotate(-90 * degToRad, 1, 0, 0);
-		this.scale(15, 15, 0.2);
+		this.scale(50, 50, 0.2);
 		this.ocean.display();
 	this.popMatrix();
 

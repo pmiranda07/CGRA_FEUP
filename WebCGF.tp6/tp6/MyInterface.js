@@ -79,30 +79,56 @@ MyInterface.prototype.processKeyboard = function(event) {
 
 	switch (event.keyCode)
 	{
-		case (65): //A
+		case (65) : //A
 				this.scene.submarine.updateRotation(0);
 				break;
-		case (97): //a
+		case (97) : //a
 				this.scene.submarine.updateRotation(0);
 				break;
-		case (100): //d
+		case (100) : //d
 				this.scene.submarine.updateRotation(1);
 				break;
-		case (68): //D 
+		case (68) : //D 
 				this.scene.submarine.updateRotation(1);
 				break;
-		case (119): //w
+		case (119) : //w
 				this.scene.submarine.updateMov(0);
 				break;
 		case (87) : //W
 				this.scene.submarine.updateMov(0);
 				break;
-		case (115): //s
+		case (115) : //s
 				this.scene.submarine.updateMov(1);
 				break;
 		case (83) : //S
 				this.scene.submarine.updateMov(1);
 				break;
+		case (81) : //Q
+				this.scene.submarine.updateDeep(0);
+				break;
+		case (113) : //q
+				this.scene.submarine.updateDeep(0);
+				break;
+		case (69) : //E
+				this.scene.submarine.updateDeep(1);
+				break;
+		case (101) : //e
+				this.scene.submarine.updateDeep(1);
+				break;
+		case (80) : //P
+				this.scene.submarine.updatePer(0);
+				break;
+		case (112) : //p
+				this.scene.submarine.updatePer(0);
+				break;
+		case (76) : //L
+				this.scene.submarine.updatePer(1);
+				break;
+		case (108) : //l
+				this.scene.submarine.updatePer(1);
+				break;
+
+		
 	};
 };
 
@@ -123,6 +149,18 @@ MyInterface.prototype.processKeyUp = function(event) {
 				break;
 		case (68): //D 
 				this.scene.submarine.restartRudder();
+				break;
+		case (81) : //Q
+				this.scene.submarine.restartHRudder();
+				break;
+		case (113) : //q
+				this.scene.submarine.restartHRudder();
+				break;
+		case (69) : //E
+				this.scene.submarine.restartHRudder();
+				break;
+		case (101) : //e
+				this.scene.submarine.restartHRudder();
 				break;
 		
 	};
