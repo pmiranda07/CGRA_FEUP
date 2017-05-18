@@ -134,13 +134,14 @@
 	//Body
 
 	this.scene.pushMatrix();
+	this.scene.translate(0,0,-2.5);
  	this.scene.scale(0.75,1,5);
  	this.Body.display();
  	this.scene.popMatrix();
 
 	//nose
  	this.scene.pushMatrix();
- 	this.scene.translate(0, 0, 5);
+ 	this.scene.translate(0, 0, 2.5);
  	this.scene.scale(0.75, 1, 1);
  	this.FrontTop.display();
  	this.scene.popMatrix();
@@ -148,6 +149,7 @@
 	//tail
 	
  	this.scene.pushMatrix();
+ 	this.scene.translate(0,0,-2.5);
  	this.scene.rotate(180*degToRad,0,1,0);
  	this.scene.scale(0.75, 1, 1);
  	this.BackTop.display();
@@ -158,8 +160,8 @@
     	this.white.apply();
     }
  	this.scene.pushMatrix();
+ 	this.scene.translate(0,1.6,1);
  	this.scene.rotate(90*degToRad,1,0,0);
- 	this.scene.translate(0, 3.3, -1.6);
  	this.scene.scale(0.50,0.9,1.6);
  	this.Cabine.display();
  	this.scene.popMatrix();
@@ -167,8 +169,8 @@
 	//CabineTop
 
  	this.scene.pushMatrix();
+ 	this.scene.translate(0,1.6,1);
  	this.scene.rotate(-90*degToRad,1,0,0);
- 	this.scene.translate(0, -3.3, 1.6);
  	this.scene.scale(0.50,0.9,1.6);
  	this.CabineTop.display();
  	this.scene.popMatrix();
@@ -177,21 +179,21 @@
   this.scene.pushMatrix();
    this.scene.translate(0,this.per,0);
  	this.scene.pushMatrix();
+ 	this.scene.translate(0,2.5,1);
  	this.scene.rotate(90*degToRad,1,0,0);
- 	this.scene.translate(0, 3.5, -2.5);
  	this.scene.scale(0.1,0.1,1);
  	this.Tube.display();
  	this.scene.popMatrix();
 
  	this.scene.pushMatrix();
- 	this.scene.translate(0, 2.4, 3.5);
+ 	this.scene.translate(0, 2.4, 1);
  	this.scene.scale(0.1,0.1,0.3);
  	this.Tube.display();
  	this.scene.popMatrix();
 
  	this.scene.pushMatrix();
+ 	this.scene.translate(0,2.5,1);
  	this.scene.rotate(-90*degToRad,1,0,0);
- 	this.scene.translate(0, -3.5, 2.5);
  	this.scene.scale(0.1,0.1,1);
  	this.TubeTop.display();
  	this.scene.popMatrix();
@@ -204,15 +206,15 @@
     }
 
  	this.scene.pushMatrix();
+ 	this.scene.translate(-1.05,-0.5,-2.5);
  	this.scene.rotate(90*degToRad,0,0,1);
- 	this.scene.translate(-0.5, 1, 0);
  	this.scene.scale(0.4,0.4,0.4);
  	this.Helice.display();
  	this.scene.popMatrix();
 
  	this.scene.pushMatrix();
+ 	this.scene.translate(1.05,-0.5,-2.5);
  	this.scene.rotate(90*degToRad,0,0,1);
- 	this.scene.translate(-0.5, -1, 0);
  	this.scene.scale(0.4,0.4,0.4);
  	this.Helice.display();
  	this.scene.popMatrix();
@@ -223,28 +225,28 @@
 	//Esfera lado direito
 
  	this.scene.pushMatrix();
- 	this.scene.translate(1,-0.5,0.2);
+ 	this.scene.translate(1.05,-0.5,-2.3);
  	this.scene.scale(0.1,0.1,0.1);
  	this.Sphere.display();
  	this.scene.popMatrix();
 
  	this.scene.pushMatrix();
+ 	this.scene.translate(1.05,-0.5,-2.3);
  	this.scene.rotate(180*degToRad,1,0,0);
- 	this.scene.translate(1,0.5,-0.2);
  	this.scene.scale(0.1,0.1,0.1);
  	this.Sphere.display();
  	this.scene.popMatrix();
 
 	//Esfera lado esquerdo
     this.scene.pushMatrix();
- 	this.scene.translate(-1,-0.5,0.2);
+ 	this.scene.translate(-1.05,-0.5,-2.3);
  	this.scene.scale(0.1,0.1,0.1);
  	this.Sphere.display();
  	this.scene.popMatrix();
 
  	this.scene.pushMatrix();
+ 	this.scene.translate(-1.05,-0.5,-2.3);
  	this.scene.rotate(180*degToRad,1,0,0);
- 	this.scene.translate(-1,0.5,-0.2);
  	this.scene.scale(0.1,0.1,0.1);
  	this.Sphere.display();
  	this.scene.popMatrix(); 
@@ -255,7 +257,7 @@
     	this.white.apply();
     }
  	this.scene.pushMatrix();
- 	this.scene.translate(1,-0.5,0.2);
+ 	this.scene.translate(1.05,-0.5,-2.3);
  	this.scene.rotate(this.rotacao*25*degToRad,0,0,1);
  	this.scene.rotate(90*degToRad,0,1,0);
  	this.scene.scale(0.08,0.1,0.7);
@@ -264,7 +266,7 @@
 
  	//turbina Esquerda
  	this.scene.pushMatrix();
- 	this.scene.translate(-1,-0.5,0.2);
+ 	this.scene.translate(-1.05,-0.5,-2.3);
  	this.scene.rotate(this.rotacao*-25*degToRad,0,0,1);
  	this.scene.rotate(90*degToRad,0,1,0);
  	this.scene.scale(0.08,0.1,0.7);
@@ -278,7 +280,7 @@
     	this.yellow.apply();
     }
 	this.scene.pushMatrix();
-	this.scene.translate(0,0,-0.5);
+	this.scene.translate(0,0,-3);
 	this.scene.rotate(this.vertical_rudder*degToRad,0,1,0);
 	this.scene.rotate(90*degToRad,0,0,1);
 	this.scene.rotate(90*degToRad,1,0,0);
@@ -289,7 +291,7 @@
 	//horizontal back rudder
 
 	this.scene.pushMatrix();
-	this.scene.translate(0,0,-0.5);
+	this.scene.translate(0,0,-3);
 	this.scene.rotate(this.h_rudder*degToRad,1,0,0);
 	this.scene.rotate(90*degToRad,1,0,0);
 	this.scene.scale(2,0.5,0.2);
@@ -302,7 +304,7 @@
 	if(this.scene.currSubmarineAppearance == 'Beatles'){
     	this.white.apply();
     }
-	this.scene.translate(0,1.2,3.4);
+	this.scene.translate(0,1.2,0.9);
 	this.scene.rotate(this.h_rudder*degToRad,1,0,0);
 	this.scene.rotate(90*degToRad,1,0,0);
 	this.scene.scale(2,0.5,0.2);
@@ -315,8 +317,8 @@
     	this.yellow.apply();
     }
 	this.scene.pushMatrix();
+	this.scene.translate(-1.05,-0.5,-2.5);
  	this.scene.rotate(90*degToRad,0,0,1);
- 	this.scene.translate(-0.5, 1, 0);
  	this.scene.scale(0.4,0.4,0.4);
  	this.reverseHelice.display();
  	this.scene.popMatrix();
@@ -324,8 +326,8 @@
  	//reverseHelice direita
 
 	this.scene.pushMatrix();
+	this.scene.translate(1.05,-0.5,-2.5);
  	this.scene.rotate(90*degToRad,0,0,1);
- 	this.scene.translate(-0.5, -1, 0);
  	this.scene.scale(0.4,0.4,0.4);
  	this.reverseHelice.display();
  	this.scene.popMatrix();
@@ -334,8 +336,8 @@
 
  	//back right
  	this.scene.pushMatrix();
+ 	this.scene.translate(-0.4,0.1,-1);
  	this.scene.rotate(-90*degToRad,0,1,0);
- 	this.scene.translate(1.5,0.1,0.4);
  	this.scene.scale(0.5,0.5,0.5);
  	this.Tube.display();
  	this.scene.popMatrix();
@@ -343,8 +345,8 @@
  	//front right
 
  	this.scene.pushMatrix();
+ 	this.scene.translate(-0.4,0.1,1);
  	this.scene.rotate(-90*degToRad,0,1,0);
- 	this.scene.translate(3.5,0.1,0.4);
  	this.scene.scale(0.5,0.5,0.5);
  	this.Tube.display();
  	this.scene.popMatrix();
@@ -352,8 +354,8 @@
  	//front left
 	
 	this.scene.pushMatrix();
+	this.scene.translate(0.9,0.1,1);
  	this.scene.rotate(-90*degToRad,0,1,0);
- 	this.scene.translate(3.5,0.1,-0.9);
  	this.scene.scale(0.5,0.5,0.5);
  	this.Tube.display();
  	this.scene.popMatrix();
@@ -361,8 +363,8 @@
  	//back left
 
  	this.scene.pushMatrix();
+ 	this.scene.translate(0.9,0.1,-1);
  	this.scene.rotate(-90*degToRad,0,1,0);
- 	this.scene.translate(1.5,0.1,-0.9);
  	this.scene.scale(0.5,0.5,0.5);
  	this.Tube.display();
  	this.scene.popMatrix();
@@ -381,8 +383,8 @@
 
 	//back right
  	this.scene.pushMatrix();
+ 	this.scene.translate(-0.9,0.1,-1);
  	this.scene.rotate(-90*degToRad,0,1,0);
- 	this.scene.translate(1.5,0.1,0.9);
  	this.scene.scale(0.5,0.5,0.5);
  	this.window.display();
  	this.scene.popMatrix();
@@ -392,8 +394,8 @@
  	if(this.scene.currSubmarineAppearance == 'Beatles'){
     	this.paul.apply();
     }
+    this.scene.translate(-0.9,0.1,1);
  	this.scene.rotate(-90*degToRad,0,1,0);
- 	this.scene.translate(3.5,0.1,0.9);
  	this.scene.scale(0.5,0.5,0.5);
  	this.window.display();
  	this.scene.popMatrix();
@@ -404,8 +406,8 @@
 	if(this.scene.currSubmarineAppearance == 'Beatles'){
     	this.ringo.apply();
     }
+    this.scene.translate(0.9,0.1,1);
  	this.scene.rotate(90*degToRad,0,1,0);
- 	this.scene.translate(-3.5,0.1,0.9);
  	this.scene.scale(0.5,0.5,0.5);
  	this.window.display();
  	this.scene.popMatrix();
@@ -416,8 +418,8 @@
  	if(this.scene.currSubmarineAppearance == 'Beatles'){
     	this.george.apply();
     }
+    this.scene.translate(0.9,0.1,-1);
  	this.scene.rotate(90*degToRad,0,1,0);
- 	this.scene.translate(-1.5,0.1,0.9);
  	this.scene.scale(0.5,0.5,0.5);
  	this.window.display();
  	this.scene.popMatrix();

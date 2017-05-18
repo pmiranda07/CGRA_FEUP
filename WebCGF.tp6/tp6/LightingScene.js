@@ -32,7 +32,7 @@ LightingScene.prototype.init = function(application) {
 	this.submarineAppearances.push("../resources/images/paul.png");
 	this.submarineAppearances.push("../resources/images/ringo.png");
 	this.submarineAppearances.push("../resources/images/george.png");
-
+	this.etorpedo=0;
 
 	this.currSubmarineAppearance = 'Militar';
 	this.submarineAppearanceList = [
@@ -54,8 +54,8 @@ LightingScene.prototype.init = function(application) {
 	this.cylinder = new MyCylinder(this,20,20);
 	this.clock = new MyClock(this);
 	this.target1= new MyTarget(this,0,3,0);
-	this.target2= new MyTarget(this,6,5,-5);
-	this.target3= new MyTarget(this,-6,4,-1);
+	this.target2= new MyTarget(this,10,5,-5);
+	this.target3= new MyTarget(this,-10,4,-1);
 
 	this.targetList = [];
 	this.targetList.push(this.target1);
@@ -209,15 +209,25 @@ LightingScene.prototype.display = function() {
 		this.cylinder.display();
 	this.popMatrix();
 
+
+
+if(this.etorpedo == 1)
+{
+    this.pushMatrix();
+    this.torpedo.display();
+    this.popMatrix();
+}
+
+
 	//clock
 
 	this.pushMatrix();
 		this.translate(0.8,-2.2,-0.5);
 		this.scale(1,1,2);
     	this.clock.display();
-    this.popMatrix();	
+    this.popMatrix();
 
-	//targets
+    //targets
 	this.pushMatrix();
 		this.targetList[0].display();
     this.popMatrix();
@@ -229,6 +239,8 @@ LightingScene.prototype.display = function() {
     this.pushMatrix();
 		this.targetList[2].display();
     this.popMatrix();
+
+
 
 
 	// ---- END Primitive drawing section
@@ -262,6 +274,8 @@ LightingScene.prototype.update=function(currTime)
 	
 	if (!this.Pausa)
 		this.clock.update(currTime);
+	if(this.etorpedo == 1)
+		this.torpedo.update(currTime);
 
 
 };
@@ -271,5 +285,14 @@ LightingScene.prototype.Options = function ()
 {
 	
 	console.log("Doing something..."); 
+
+};
+
+
+LightingScene.prototype.CreateTorpedo = function ()
+{
+	
+	this.etorpedo=1;
+	this.torpedo=new MyTorpedo(this);
 
 };

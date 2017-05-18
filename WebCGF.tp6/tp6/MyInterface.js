@@ -127,6 +127,12 @@ MyInterface.prototype.processKeyboard = function(event) {
 		case (108) : //l
 				this.scene.submarine.updatePer(1);
 				break;
+		case (70) : //F
+				this.scene.CreateTorpedo();
+				break;
+		case (102) : //f
+				this.scene.CreateTorpedo();
+				break;
 
 		
 	};

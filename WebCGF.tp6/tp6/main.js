@@ -23,6 +23,7 @@ serialInclude([
 	'MyRudder.js',
 	'ReverseCylinder.js',
 	'MyTarget.js',
+	'MyTorpedo.js',
 
 	
 
