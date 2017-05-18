@@ -39,6 +39,7 @@ LightingScene.prototype.init = function(application) {
 	this.submarineAppearances.push("../resources/images/blue.png");
 	this.submarineAppearances.push("../resources/images/symbol.png");
 	this.etorpedo=0;
+	this.c=-1;
 
 	this.currSubmarineAppearance = 'Militar';
 	this.submarineAppearanceList = [
@@ -326,7 +327,13 @@ LightingScene.prototype.Options = function ()
 LightingScene.prototype.CreateTorpedo = function ()
 {
 
+	this.c+=1;
+	if(this.c < 3)
+	{
+	
 	this.etorpedo=1;
 	this.torpedo=new MyTorpedo(this);
+	
+	}
 
 };
