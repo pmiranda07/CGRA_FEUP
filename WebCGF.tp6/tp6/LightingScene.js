@@ -32,6 +32,8 @@ LightingScene.prototype.init = function(application) {
 	this.submarineAppearances.push("../resources/images/paul.png");
 	this.submarineAppearances.push("../resources/images/ringo.png");
 	this.submarineAppearances.push("../resources/images/george.png");
+	this.submarineAppearances.push("../resources/images/blue.png");
+	this.submarineAppearances.push("../resources/images/symbol.png");
 	this.etorpedo=0;
 
 	this.currSubmarineAppearance = 'Militar';
@@ -114,7 +116,7 @@ LightingScene.prototype.initLights = function() {
 	this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
 	this.lights[0].setLinearAttenuation(0);
 	this.lights[0].setConstantAttenuation(1);
-	this.lights[0].setQuadraticAttenuation(1);
+	this.lights[0].setQuadraticAttenuation(0);
 	this.lights[0].enable();
 
 	this.lights[1].setAmbient(0.3, 0.3, 0.3, 1);
@@ -122,7 +124,7 @@ LightingScene.prototype.initLights = function() {
 	this.lights[1].setSpecular(1.0, 1.0, 1.0, 1.0);
 	this.lights[1].setLinearAttenuation(0);
 	this.lights[1].setConstantAttenuation(1);
-	this.lights[1].setQuadraticAttenuation(0);
+	this.lights[1].setQuadraticAttenuation(1);
 	this.lights[1].enable();
 
 	this.lights[2].setAmbient(0.3, 0.3, 0.3, 1);
@@ -136,9 +138,9 @@ LightingScene.prototype.initLights = function() {
 	this.lights[3].setAmbient(0, 0, 0, 1);
 	this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0);
 	this.lights[3].setSpecular(1.0, 1.0, 1.0, 1.0);
-	this.lights[3].setLinearAttenuation(0);
+	this.lights[3].setLinearAttenuation(1);
 	this.lights[3].setConstantAttenuation(1);
-	this.lights[3].setQuadraticAttenuation(1);
+	this.lights[3].setQuadraticAttenuation(0);
 	this.lights[3].enable();
 
 
