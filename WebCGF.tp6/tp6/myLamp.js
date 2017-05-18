@@ -2,32 +2,32 @@
  * myLamp
  * @constructor
  */
- function myLamp(scene, slices, stacks) {
- 	CGFobject.call(this,scene);
-	
+function myLamp(scene, slices, stacks) {
+	CGFobject.call(this,scene);
+
 	this.slices = slices;
 	this.stacks = stacks;
 
- 	this.initBuffers();
- };
+	this.initBuffers();
+};
 
- myLamp.prototype = Object.create(CGFobject.prototype);
- myLamp.prototype.constructor = myLamp;
+myLamp.prototype = Object.create(CGFobject.prototype);
+myLamp.prototype.constructor = myLamp;
 
- myLamp.prototype.initBuffers = function() {
- 	/*
- 	* TODO:
- 	* Replace the following lines in order to build a cylinder with a **single mesh**.
- 	*
- 	* How can the vertices, indices and normals arrays be defined to
- 	* build a prism with varying number of slices and stacks?
- 	*/
+myLamp.prototype.initBuffers = function() {
+	/*
+	 * TODO:
+	 * Replace the following lines in order to build a cylinder with a **single mesh**.
+	 *
+	 * How can the vertices, indices and normals arrays be defined to
+	 * build a prism with varying number of slices and stacks?
+	 */
 
 	this.vertices = [];
- 	this.normals = [];
- 	this.indices = [];
- 	this.texCoords = [];
-	
+	this.normals = [];
+	this.indices = [];
+	this.texCoords = [];
+
 	var t=(2*Math.PI)/this.slices;
 	var angH=(Math.PI/2)/this.stacks;
 
@@ -41,7 +41,7 @@
 		}
 
 	}	
-		
+
 	for(i = 0; i < this.stacks; i++) {
 		for(j = 0; j < this.slices - 1; j++) {
 			this.indices.push(i*this.slices + j, i*this.slices + j+1, (i+1)*this.slices + j);
@@ -55,12 +55,12 @@
 
 
 
-// para testar na consola 
-//console.log(this.vertices);
-//console.log(this.indices);
-//console.log(this.normals);
+//	para testar na consola 
+//	console.log(this.vertices);
+//	console.log(this.indices);
+//	console.log(this.normals);
 
- 	this.primitiveType = this.scene.gl.TRIANGLES;
+	this.primitiveType = this.scene.gl.TRIANGLES;
 
- 	this.initGLBuffers();
- };
+	this.initGLBuffers();
+};

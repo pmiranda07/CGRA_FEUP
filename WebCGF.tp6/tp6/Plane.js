@@ -37,12 +37,12 @@ Plane.prototype.initBuffers = function() {
 	        |
 	12  13  |  14  15    
 
-	*/
+	 */
 
 	// Generate vertices and normals 
 	this.vertices = [];
 	this.normals = [];
-	
+
 	// Uncomment below to init texCoords
 	this.texCoords = [];
 	var deltaS = (this.maxS-this.minS)/this.nrDivs;
@@ -55,20 +55,20 @@ Plane.prototype.initBuffers = function() {
 		for (var i = 0; i <= this.nrDivs; i++) 
 		{
 			this.vertices.push(xCoord, yCoord, 0);
-			
+
 			// As this plane is being drawn on the xy plane, the normal to the plane will be along the positive z axis.
 			// So all the vertices will have the same normal, (0, 0, 1).
-			
+
 			this.normals.push(0,0,1);
 
 			// texCoords should be computed here; uncomment and fill the blanks
-			 this.texCoords.push(this.minS+i*deltaS,this.minT+j*deltaT);
+			this.texCoords.push(this.minS+i*deltaS,this.minT+j*deltaT);
 
 			xCoord += this.patchLength;
 		}
 		yCoord -= this.patchLength;
 	}
-	
+
 	// Generating indices
 	/* for nrDivs = 3 output will be 
 		[
@@ -101,11 +101,11 @@ Plane.prototype.initBuffers = function() {
 			this.indices.push(ind);
 		}
 	}
-	
+
 	this.primitiveType = this.scene.gl.TRIANGLE_STRIP;
 
-/* Alternative with TRIANGLES instead of TRIANGLE_STRIP. More indices, but no degenerate triangles */
-/*
+	/* Alternative with TRIANGLES instead of TRIANGLE_STRIP. More indices, but no degenerate triangles */
+	/*
 	for (var j = 0; j < this.nrDivs; j++) 
 	{
 		for (var i = 0; i < this.nrDivs; i++) 
@@ -119,7 +119,7 @@ Plane.prototype.initBuffers = function() {
 	}
 
 	this.primitiveType = this.scene.gl.TRIANGLES;
-*/
+	 */
 
 	this.initGLBuffers();
 };

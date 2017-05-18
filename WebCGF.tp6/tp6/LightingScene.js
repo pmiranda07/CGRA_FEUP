@@ -20,8 +20,12 @@ LightingScene.prototype.init = function(application) {
 	this.Luz2=true;
 	this.Luz3=true;
 	this.Luz4=true;
+
+	this.Musica=true;
 	this.Pausa=false;
+
 	this.speed=0;
+	this.audio;
 	this.submarineAppearances = [];
 	this.submarineAppearances.push("../resources/images/rusty.png");
 	this.submarineAppearances.push("../resources/images/yellow.png");
@@ -38,8 +42,8 @@ LightingScene.prototype.init = function(application) {
 
 	this.currSubmarineAppearance = 'Militar';
 	this.submarineAppearanceList = [
-	'Militar', 'Beatles', 'Rusty'
-	];
+		'Militar', 'Beatles', 'Rusty'
+		];
 
 
 	this.gl.clearColor(0.0, 0.0, 1.0, 1.0);
@@ -68,8 +72,8 @@ LightingScene.prototype.init = function(application) {
 
 	//ocean
 
-  	this.oceanAppearence = new CGFappearance(this);
-  	this.oceanAppearence.setAmbient(0.3,0.3,0.3,1);
+	this.oceanAppearence = new CGFappearance(this);
+	this.oceanAppearence.setAmbient(0.3,0.3,0.3,1);
 	this.oceanAppearence.setDiffuse(0.8,0.8,0.8,1);
 	this.oceanAppearence.setSpecular(0.2,0.2,0.2,1);
 	this.oceanAppearence.setShininess(60);
@@ -85,7 +89,13 @@ LightingScene.prototype.init = function(application) {
 	this.rusty.setShininess(120);
 	this.rusty.loadTexture("../resources/images/rusty.png");
 
+	//musics 
 	
+	this.ameno = new Audio('../resources/ameno.mp3');
+	this.yellow = new Audio('../resources/yellowsubmarine.mp3');
+	this.sonar = new Audio('../resources/sonar.mp3');
+
+
 
 };
 
@@ -95,18 +105,18 @@ LightingScene.prototype.initCameras = function() {
 
 LightingScene.prototype.initLights = function() {
 	this.setGlobalAmbientLight(0,0,0, 1.0);
-	
+
 	// Positions for four lights
 	this.lights[0].setPosition(0, 10, 0, 1);
 	this.lights[0].setVisible(false); // show marker on light position (different from enabled)
-	
+
 	this.lights[1].setPosition(15, 10.0, 0, 1.0);
 	this.lights[1].setVisible(false); // show marker on light position (different from enabled)
 
 	this.lights[2].setPosition(15, 10.0, 15, 1.0);
 	this.lights[2].setVisible(false);
 
-	
+
 	this.lights[3].setPosition(0, 10.0, 15, 1.0);
 	this.lights[3].setVisible(false);
 
@@ -173,11 +183,11 @@ LightingScene.prototype.display = function() {
 	// Draw axis
 	this.axis.display();
 
-	
+
 
 	// ---- END Background, camera and axis setup
 
-	
+
 	// ---- BEGIN Geometric transformation section
 
 	// ---- END Geometric transformation section
@@ -187,60 +197,60 @@ LightingScene.prototype.display = function() {
 
 	//ocean
 	this.pushMatrix();
-		this.oceanAppearence.apply();
-		this.translate(7.5, 0, 7.5);
-		this.rotate(-90 * degToRad, 1, 0, 0);
-		this.scale(50, 50, 0.2);
-		this.ocean.display();
+	this.oceanAppearence.apply();
+	this.translate(7.5, 0, 7.5);
+	this.rotate(-90 * degToRad, 1, 0, 0);
+	this.scale(50, 50, 0.2);
+	this.ocean.display();
 	this.popMatrix();
 
 	//submarine
 
-	
+
 	this.pushMatrix();
-		this.submarine.display();
+	this.submarine.display();
 	this.popMatrix();
 
 	//cylinder
 
 	this.pushMatrix()
-		this.rusty.apply();
-		this.rotate(-90 * degToRad, 1, 0, 0);
-		this.translate(8,0,0);
-		this.scale(0.2,0.2,5);
-		this.cylinder.display();
+	this.rusty.apply();
+	this.rotate(-90 * degToRad, 1, 0, 0);
+	this.translate(8,0,0);
+	this.scale(0.2,0.2,5);
+	this.cylinder.display();
 	this.popMatrix();
 
 
 
-if(this.etorpedo == 1)
-{
-    this.pushMatrix();
-    this.torpedo.display();
-    this.popMatrix();
-}
+	if(this.etorpedo == 1)
+	{
+		this.pushMatrix();
+		this.torpedo.display();
+		this.popMatrix();
+	}
 
 
 	//clock
 
 	this.pushMatrix();
-		this.translate(0.8,-2.2,-0.5);
-		this.scale(1,1,2);
-    	this.clock.display();
-    this.popMatrix();
+	this.translate(0.8,-2.2,-0.5);
+	this.scale(1,1,2);
+	this.clock.display();
+	this.popMatrix();
 
-    //targets
+	//targets
 	this.pushMatrix();
-		this.targetList[0].display();
-    this.popMatrix();
+	this.targetList[0].display();
+	this.popMatrix();
 
-    this.pushMatrix();
-		this.targetList[1].display();
-    this.popMatrix();
+	this.pushMatrix();
+	this.targetList[1].display();
+	this.popMatrix();
 
-    this.pushMatrix();
-		this.targetList[2].display();
-    this.popMatrix();
+	this.pushMatrix();
+	this.targetList[2].display();
+	this.popMatrix();
 
 
 
@@ -257,23 +267,45 @@ LightingScene.prototype.update=function(currTime)
 		this.lights[0].enable();
 	else
 		this.lights[0].disable();
-	
+
 	if (this.Luz2)
 		this.lights[1].enable();
 	else
 		this.lights[1].disable();
-	
+
 	if (this.Luz3)
 		this.lights[2].enable();
 	else
 		this.lights[2].disable();
-	
+
 	if (this.Luz4)
 		this.lights[3].enable();
 	else
 		this.lights[3].disable();
 
-	
+
+	if(this.Musica){
+		if(this.currSubmarineAppearance == 'Militar'){
+			this.yellow.pause();
+			this.sonar.pause();
+			this.ameno.play(); 
+		}else if(this.currSubmarineAppearance == 'Beatles'){
+			this.ameno.pause();
+			this.sonar.pause();
+			this.yellow.play(); 
+		}else if(this.currSubmarineAppearance == 'Rusty'){
+			this.ameno.pause();
+			this.yellow.pause();
+			this.sonar.play();
+		}		
+	}
+	else{
+		this.ameno.pause();
+		this.yellow.pause();
+		this.sonar.pause();
+	}
+
+
 	if (!this.Pausa)
 		this.clock.update(currTime);
 	if(this.etorpedo == 1)
@@ -285,7 +317,7 @@ LightingScene.prototype.update=function(currTime)
 
 LightingScene.prototype.Options = function ()
 {
-	
+
 	console.log("Doing something..."); 
 
 };
@@ -293,7 +325,7 @@ LightingScene.prototype.Options = function ()
 
 LightingScene.prototype.CreateTorpedo = function ()
 {
-	
+
 	this.etorpedo=1;
 	this.torpedo=new MyTorpedo(this);
 
