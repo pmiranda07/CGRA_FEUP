@@ -13,6 +13,7 @@ LightingScene.prototype.init = function(application) {
 	this.initCameras();
 	this.enableTextures(true);
 
+
 	this.initLights();
 	this.setUpdatePeriod(100);
 
@@ -235,6 +236,7 @@ LightingScene.prototype.display = function() {
 	//clock
 
 	this.pushMatrix();
+	this.rusty.apply();
 	this.translate(0.8,-2.2,-0.5);
 	this.scale(1,1,2);
 	this.clock.display();
@@ -263,6 +265,7 @@ LightingScene.prototype.display = function() {
 
 LightingScene.prototype.update=function(currTime)
 {
+
 	this.submarine.update(currTime);
 	if (this.Luz1)
 		this.lights[0].enable();

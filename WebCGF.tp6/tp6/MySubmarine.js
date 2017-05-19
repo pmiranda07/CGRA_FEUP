@@ -28,6 +28,10 @@ function MySubmarine(scene, x, y, z, angulo) {
 	this.rotacao=0;
 	this.h_rudder=0;
 	this.per = 0;
+	this.lastUpdate=-1;
+	this.inc=0;
+	this.incr=0;
+	this.rotDeep=0;
 
 	//rusty 
 
@@ -113,9 +117,9 @@ function MySubmarine(scene, x, y, z, angulo) {
 	//blue
 	this.blue = new CGFappearance(this.scene);
 	this.blue.setAmbient(0.3,0.3,0.3,1);
-	this.blue.setDiffuse(0.7,0.7,0.7,1);
+	this.blue.setDiffuse(0.5,0.5,0.5,1);
 	this.blue.setSpecular(0.5,0.5,0.5,1);	
-	this.blue.setShininess(120);
+	this.blue.setShininess(10);
 	this.blue.loadTexture(this.scene.submarineAppearances[9]);
 
 	//symbol
@@ -143,6 +147,7 @@ MySubmarine.prototype.display = function() {
 	}
 
 	this.scene.translate(this.x,this.y,this.z);
+	this.scene.rotate(this.rotDeep,1,0,0);
 	this.scene.rotate(this.angulo,0,1,0);
 
 
@@ -277,7 +282,7 @@ if(this.scene.currSubmarineAppearance == 'Beatles'){
 }
 this.scene.pushMatrix();
 this.scene.translate(1.05,-0.5,-2.3);
-this.scene.rotate(this.rotacao*25*degToRad,0,0,1);
+this.scene.rotate(this.rotacao,0,0,1);
 this.scene.rotate(90*degToRad,0,1,0);
 this.scene.scale(0.08,0.1,0.7);
 this.turbine.display();
@@ -286,7 +291,7 @@ this.scene.popMatrix();
 //turbina Esquerda
 this.scene.pushMatrix();
 this.scene.translate(-1.05,-0.5,-2.3);
-this.scene.rotate(this.rotacao*-25*degToRad,0,0,1);
+this.scene.rotate(-this.rotacao,0,0,1);
 this.scene.rotate(90*degToRad,0,1,0);
 this.scene.scale(0.08,0.1,0.7);
 this.turbine.display();
@@ -487,9 +492,22 @@ MySubmarine.prototype.updateMov = function(Dir) {
 
 MySubmarine.prototype.update = function(currTime) {
 
-	this.x+=this.scene.speed*Math.sin(this.angulo);
-	this.z+=this.scene.speed*Math.cos(this.angulo);
-	this.rotacao += 36*degToRad*this.scene.speed;
+	if (this.lastUpdate == -1) {
+		this.lastUpdate = currTime;
+	}
+	else {
+		var diff = currTime - this.lastUpdate;
+		this.lastUpdate = currTime;
+		this.inc = this.scene.speed*diff/100;
+		this.incr=(360*diff/100)*degToRad*this.scene.speed;
+	
+	}
+
+
+	this.x+=this.inc*Math.sin(this.angulo);
+	this.z+=this.inc*Math.cos(this.angulo);
+	this.y+=this.inc*Math.sin(this.rotDeep);
+	this.rotacao +=this.incr;	
 
 }
 
@@ -503,19 +521,19 @@ MySubmarine.prototype.restartRudder = function() {
 MySubmarine.prototype.updateDeep = function(Dir)
 {
 	if(this.y >= 2 && Dir == 0 && this.scene.speed >=0){
-		this.y +=0.5
+		this.rotDeep+=25*degToRad;
 		this.h_rudder = -25;
 	}
 	if(this.y > 2 && Dir == 1 && this.scene.speed >=0){
-		this.y -=0.5
+		this.rotDeep-=25*degToRad;
 		this.h_rudder = 25;
 	}
 	if(this.y >= 2 && Dir == 0 && this.scene.speed < 0){
-		this.y +=0.5
+		this.rotDeep-=25*degToRad;
 		this.h_rudder = 25;
 	}
 	if(this.y > 2 && Dir == 1 && this.scene.speed < 0){
-		this.y -=0.5
+		this.rotDeep+=25*degToRad;
 		this.h_rudder = -25;
 	}
 

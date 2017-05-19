@@ -14,6 +14,25 @@ function MyTorpedo(scene) {
 	this.z = this.scene.submarine.z;
 	this.y = this.scene.submarine.y;
 	this.angulo = this.scene.submarine.angulo;
+	this.lastUpdate=-1;
+	this.inc=0;
+	
+	//torpedo movement
+	this.p1x=this.x;
+	this.p1y=this.y;
+	this.p1z=this.z;
+	this.p2x=this.x+6*Math.sin(this.angulo);
+	this.p2y=this.y;
+	this.p2z=this.z+6*Math.cos(this.angulo);
+	this.p3x=this.scene.targetList[this.scene.c].x;
+	this.p3y=this.scene.targetList[this.scene.c].y+3;
+	this.p3z=this.scene.targetList[this.scene.c].z;
+	this.p4x=this.scene.targetList[this.scene.c].x;
+	this.p4y=this.scene.targetList[this.scene.c].y;
+	this.p4z=this.scene.targetList[this.scene.c].z;
+	this.t=0;
+	this.dist=Math.sqrt(Math.pow((this.p4x-this.p1x),2)+Math.pow((this.p4y-this.p1y),2)+Math.pow((this.p4z-this.p1z),2));
+
 
 	//rusty 
 
@@ -112,5 +131,18 @@ MyTorpedo.prototype.display = function() {
 
 MyTorpedo.prototype.update = function(currTime) {
 
+if (this.lastUpdate == -1) {
+		this.lastUpdate = currTime;
+		inc = 0.6;
+	}
+	else {
+		var diff = currTime - this.lastUpdate;
+		this.lastUpdate = currTime;
+		inc = diff/(this.dist*1000);
+	}
+	this.t+=inc;
+	this.x=Math.pow((1-this.t),3)*this.p1x + 3*this.t*Math.pow((1-this.t),2)*this.p2x+3*Math.pow(this.t,2)*(1-this.t)*this.p3x+Math.pow(this.t,3)*this.p4x; 
+	this.y=Math.pow((1-this.t),3)*this.p1y + 3*this.t*Math.pow((1-this.t),2)*this.p2y+3*Math.pow(this.t,2)*(1-this.t)*this.p3y+Math.pow(this.t,3)*this.p4y;
+	this.z=Math.pow((1-this.t),3)*this.p1z + 3*this.t*Math.pow((1-this.t),2)*this.p2z+3*Math.pow(this.t,2)*(1-this.t)*this.p3z+Math.pow(this.t,3)*this.p4z;  
 
 }
