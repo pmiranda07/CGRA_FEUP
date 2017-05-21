@@ -46,17 +46,13 @@ MyTarget.prototype.display = function() {
 
 	this.rusty.apply();
 	this.scene.pushMatrix();
-	this.scene.translate(-0.82,2.2,0.25);
 	this.scene.rotate(-90*degToRad,1,0,0);
-	this.scene.scale(1,0.5,1);
 	this.sphere.display();
 	this.scene.popMatrix();
 
 	//down sphere
 	this.scene.pushMatrix();
-	this.scene.translate(-0.82,2.2,0.25);
 	this.scene.rotate(90*degToRad,1,0,0);
-	this.scene.scale(1,0.5,1);
 	this.sphere.display();
 	this.scene.popMatrix();
 
@@ -64,51 +60,91 @@ MyTarget.prototype.display = function() {
 
 	this.metal.apply();
 	this.scene.pushMatrix();
-	this.scene.translate(-0.8,2.2,0.6);
+	this.scene.translate(0,0,1);
 	this.scene.scale(0.03,0.03,0.3);
 	this.pins.display();
 	this.scene.popMatrix();
 
 
 	this.scene.pushMatrix();
-	this.scene.translate(0.1,2.2,0.25);
+	this.scene.translate(1,0,0);
 	this.scene.rotate(90*degToRad,0,1,0);
-	this.scene.scale(0.03,0.03,0.5);
+	this.scene.scale(0.03,0.03,0.3);
 	this.pins.display();
 	this.scene.popMatrix();
 
 	this.scene.pushMatrix();
-	this.scene.translate(-0.8,2.2,-0.1);
+	this.scene.translate(0,0,-1);
 	this.scene.rotate(180*degToRad,0,1,0);
 	this.scene.scale(0.03,0.03,0.3);
 	this.pins.display();
 	this.scene.popMatrix();
 
 	this.scene.pushMatrix();
-	this.scene.translate(-1.8,2.2,0.2);
+	this.scene.translate(-1,0,0);
 	this.scene.rotate(-90*degToRad,0,1,0);
 	this.scene.scale(0.03,0.03,0.3);
 	this.pins.display();
 	this.scene.popMatrix();
 
 	this.scene.pushMatrix();
-	this.scene.translate(-0.8,1.2,0.25);
+	this.scene.translate(0,-1,0);
 	this.scene.rotate(90*degToRad,1,0,0);
-	this.scene.scale(0.03,0.03,0.4);
+	this.scene.scale(0.03,0.03,0.3);
 	this.pins.display();
 	this.scene.popMatrix();
 
 
 	this.scene.pushMatrix();
-	this.scene.translate(-0.4,2.8,0.45);
+	this.scene.translate(0.6,0.5,0.6);
 	this.scene.rotate(-45*degToRad,1,0,0);
 	this.scene.rotate(45*degToRad,0,1,0);
-	this.scene.scale(0.03,0.03,0.35);
+	this.scene.scale(0.03,0.03,0.3);
 	this.pins.display();
 	this.scene.popMatrix();  
 
 	this.scene.pushMatrix();
-	this.scene.translate(-1.2,2.8,0.45);
+	this.scene.translate(-0.6,0.5,0.6);
+	this.scene.rotate(-45*degToRad,1,0,0);
+	this.scene.rotate(-45*degToRad,0,1,0);
+	this.scene.scale(0.03,0.03,0.3);
+	this.pins.display();
+	this.scene.popMatrix();
+
+	this.scene.pushMatrix();
+	this.scene.translate(0.8,0.5,-0.8);
+	this.scene.rotate(45*degToRad,1,0,0);
+	this.scene.rotate(-45*degToRad,0,1,0);
+	this.scene.scale(0.03,0.03,0.3);
+	this.pins.display();
+	this.scene.popMatrix();
+
+	this.scene.pushMatrix();
+	this.scene.translate(-0.8,0.5,-0.8);
+	this.scene.rotate(45*degToRad,1,0,0);
+	this.scene.rotate(45*degToRad,0,1,0);
+	this.scene.scale(0.03,0.03,0.3);
+	this.pins.display();
+	this.scene.popMatrix();
+
+	this.scene.pushMatrix();
+	this.scene.translate(0.6,-0.5,0.6);
+	this.scene.rotate(45*degToRad,1,0,0);
+	this.scene.rotate(45*degToRad,0,1,0);
+	this.scene.scale(0.03,0.03,0.3);
+	this.pins.display();
+	this.scene.popMatrix();
+
+	this.scene.pushMatrix();
+	this.scene.translate(-0.6,-0.5,0.6);
+	this.scene.rotate(45*degToRad,1,0,0);
+	this.scene.rotate(-45*degToRad,0,1,0);
+	this.scene.scale(0.03,0.03,0.35);
+	this.pins.display();
+	this.scene.popMatrix();
+
+	this.scene.pushMatrix();
+	this.scene.translate(0.8,-0.5,-0.8);
 	this.scene.rotate(-45*degToRad,1,0,0);
 	this.scene.rotate(-45*degToRad,0,1,0);
 	this.scene.scale(0.03,0.03,0.35);
@@ -116,47 +152,7 @@ MyTarget.prototype.display = function() {
 	this.scene.popMatrix();
 
 	this.scene.pushMatrix();
-	this.scene.translate(-0.2,2.9,-0.2);
-	this.scene.rotate(45*degToRad,1,0,0);
-	this.scene.rotate(-45*degToRad,0,1,0);
-	this.scene.scale(0.03,0.03,0.35);
-	this.pins.display();
-	this.scene.popMatrix();
-
-	this.scene.pushMatrix();
-	this.scene.translate(-1.3,2.9,-0.2);
-	this.scene.rotate(45*degToRad,1,0,0);
-	this.scene.rotate(45*degToRad,0,1,0);
-	this.scene.scale(0.03,0.03,0.35);
-	this.pins.display();
-	this.scene.popMatrix();
-
-	this.scene.pushMatrix();
-	this.scene.translate(-0.3,1.6,0.5);
-	this.scene.rotate(45*degToRad,1,0,0);
-	this.scene.rotate(45*degToRad,0,1,0);
-	this.scene.scale(0.03,0.03,0.35);
-	this.pins.display();
-	this.scene.popMatrix();
-
-	this.scene.pushMatrix();
-	this.scene.translate(-1.3,1.5,0.5);
-	this.scene.rotate(45*degToRad,1,0,0);
-	this.scene.rotate(-45*degToRad,0,1,0);
-	this.scene.scale(0.03,0.03,0.35);
-	this.pins.display();
-	this.scene.popMatrix();
-
-	this.scene.pushMatrix();
-	this.scene.translate(-0.1,1.6,-0.3);
-	this.scene.rotate(-45*degToRad,1,0,0);
-	this.scene.rotate(-45*degToRad,0,1,0);
-	this.scene.scale(0.03,0.03,0.35);
-	this.pins.display();
-	this.scene.popMatrix();
-
-	this.scene.pushMatrix();
-	this.scene.translate(-1.4,1.5,-0.2);
+	this.scene.translate(-0.8,-0.5,-0.8);
 	this.scene.rotate(-45*degToRad,1,0,0);
 	this.scene.rotate(45*degToRad,0,1,0);
 	this.scene.scale(0.03,0.03,0.35);

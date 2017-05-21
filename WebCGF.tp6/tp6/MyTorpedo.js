@@ -16,6 +16,7 @@ function MyTorpedo(scene) {
 	this.angulo = this.scene.submarine.angulo;
 	this.lastUpdate=-1;
 	this.inc=0;
+	this.angDeep=0;
 	
 	//torpedo movement
 	this.p1x=this.x;
@@ -32,7 +33,7 @@ function MyTorpedo(scene) {
 	this.p4z=this.scene.targetList[this.scene.c].z;
 	this.t=0;
 	this.dist=Math.sqrt(Math.pow((this.p4x-this.p1x),2)+Math.pow((this.p4y-this.p1y),2)+Math.pow((this.p4z-this.p1z),2));
-
+	this.torpedoSpeed=2;
 
 	//rusty 
 
@@ -72,6 +73,8 @@ MyTorpedo.prototype.display = function() {
 
 	this.scene.translate(this.x,this.y,this.z);
 	this.scene.rotate(this.angulo,0,1,0);
+	this.scene.rotate(this.angDeep,1,0,0);
+
 
 	this.scene.pushMatrix();
 	if(this.scene.currSubmarineAppearance == 'Militar'){
@@ -138,21 +141,59 @@ if (this.lastUpdate == -1) {
 	else {
 		var diff = currTime - this.lastUpdate;
 		this.lastUpdate = currTime;
-		inc = diff/(this.dist*1000);
+		inc = diff*this.torpedoSpeed/(this.dist*1000);
 	}
 
-if(this.x-this.p4x < 0.2 && this.y-this.p4y < 0.2 && this.z-this.p4z < 0.2)
+if(this.x-this.p4x < 1.3 && this.y-this.p4y < 1.3 && this.z-this.p4z < 1.3)
 	{
 		this.scene.etorpedo = 2;
 		this.scene.targ +=1;
+		this.scene.explode +=1;
+		this.scene.explodedisp = 1;
 
 	}
 	else
 	{
 		this.t+=inc;
+		var P=[this.x, this.y, this.z];
 		this.x=Math.pow((1-this.t),3)*this.p1x + 3*this.t*Math.pow((1-this.t),2)*this.p2x+3*Math.pow(this.t,2)*(1-this.t)*this.p3x+Math.pow(this.t,3)*this.p4x; 
 		this.y=Math.pow((1-this.t),3)*this.p1y + 3*this.t*Math.pow((1-this.t),2)*this.p2y+3*Math.pow(this.t,2)*(1-this.t)*this.p3y+Math.pow(this.t,3)*this.p4y;
 		this.z=Math.pow((1-this.t),3)*this.p1z + 3*this.t*Math.pow((1-this.t),2)*this.p2z+3*Math.pow(this.t,2)*(1-this.t)*this.p3z+Math.pow(this.t,3)*this.p4z;  
+			
+			//rotacao em y
+			if((this.z-P[2])==0){
+				if((this.x-P[0])>0){
+					this.angulo=90*degToRad;
+				}
+				else if((this.x-P[0])<0){
+					this.angulo=-90*degToRad;
+				}
+			}
+			else{
+				if((P[2]-this.z)<0){
+					this.angulo=Math.atan((this.x-P[0])/(this.z-P[2]));
+				}
+				else if((P[2]-this.z)>0){
+					this.angulo=180*degToRad+Math.atan((this.x-P[0])/(this.z-P[2]));
+				}
+			
+			}
+
+			//rotacao em x
+			var partialDist=Math.sqrt(Math.pow((this.x-P[0]),2)+Math.pow((this.z-P[2]),2));
+			if(partialDist==0){
+				if((this.y-P[1])>0){
+					this.angDeep=-90*degToRad;
+				}
+				else if(this.y-P[1]<0){
+					this.angDeep=90*degToRad;
+				}
+			}
+			else{
+				this.angDeep=Math.atan((P[1]-this.y)/partialDist);
+			}
+
+
    	}
 }
 

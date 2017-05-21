@@ -42,6 +42,8 @@ LightingScene.prototype.init = function(application) {
 	this.etorpedo=0;
 	this.c=-1;
 	this.targ=0;
+	this.explode=0;
+	this.explodedisp=0;
 
 	this.currSubmarineAppearance = 'Militar';
 	this.submarineAppearanceList = [
@@ -62,14 +64,16 @@ LightingScene.prototype.init = function(application) {
 	this.submarine = new MySubmarine(this, 8, 2, 8, 180*degToRad);
 	this.cylinder = new MyCylinder(this,20,20);
 	this.clock = new MyClock(this);
-	this.target1= new MyTarget(this,0,3,0);
-	this.target2= new MyTarget(this,10,5,-5);
-	this.target3= new MyTarget(this,-10,4,-1);
-
+	this.target1= new MyTarget(this,0,1,0);
+	this.target2= new MyTarget(this,6,1,-4);
+	this.target3= new MyTarget(this,-10,1,-1);
 	this.targetList = [];
 	this.targetList.push(this.target1);
 	this.targetList.push(this.target2);
 	this.targetList.push(this.target3);
+	this.explosion1 = new MyExplosion(this,0,1,0);
+	this.explosion2 = new MyExplosion(this,6,1,-4);
+	this.explosion3 = new MyExplosion(this,-10,1,-1);
 
 	//Materials
 
@@ -233,15 +237,28 @@ LightingScene.prototype.display = function() {
 		this.popMatrix();
 	}
 
+//explosao	
+	if(this.explode == 1 && this.explodedisp == 1)
+	{
+		this.pushMatrix();
+		this.explosion1.display();
+		this.popMatrix();
 
-	//clock
+	}
+	if(this.explode == 2 && this.explodedisp == 1)
+	{
+		this.pushMatrix();
+		this.explosion2.display();
+		this.popMatrix();
 
-	this.pushMatrix();
-	this.rusty.apply();
-	this.translate(0.8,-2.2,-0.5);
-	this.scale(1,1,2);
-	this.clock.display();
-	this.popMatrix();
+	}
+	if(this.explode == 3 && this.explodedisp == 1)
+	{
+		this.pushMatrix();
+		this.explosion3.display();
+		this.popMatrix();
+
+	}
 
 	//targets
 	if(this.targ == 0)
@@ -278,6 +295,16 @@ LightingScene.prototype.display = function() {
 	}
 
 
+	//clock
+
+	this.pushMatrix();
+	this.rusty.apply();
+	this.translate(0.8,-2.2,-0.5);
+	this.scale(1,1,2);
+	this.clock.display();
+	this.popMatrix();
+
+	
 
 
 
@@ -337,7 +364,13 @@ LightingScene.prototype.update=function(currTime)
 		this.clock.update(currTime);
 	if(this.etorpedo == 1)
 		this.torpedo.update(currTime);
-
+	
+	if(this.explode == 1)
+		this.explosion1.update(currTime);
+	if(this.explode == 2)
+		this.explosion2.update(currTime);
+	if(this.explode == 3)
+		this.explosion3.update(currTime);
 
 };
 
