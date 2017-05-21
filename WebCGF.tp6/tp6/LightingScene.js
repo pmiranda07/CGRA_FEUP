@@ -41,6 +41,7 @@ LightingScene.prototype.init = function(application) {
 	this.submarineAppearances.push("../resources/images/symbol.png");
 	this.etorpedo=0;
 	this.c=-1;
+	this.targ=0;
 
 	this.currSubmarineAppearance = 'Militar';
 	this.submarineAppearanceList = [
@@ -223,7 +224,7 @@ LightingScene.prototype.display = function() {
 	this.cylinder.display();
 	this.popMatrix();
 
-
+//torpedo
 
 	if(this.etorpedo == 1)
 	{
@@ -243,17 +244,39 @@ LightingScene.prototype.display = function() {
 	this.popMatrix();
 
 	//targets
-	this.pushMatrix();
-	this.targetList[0].display();
-	this.popMatrix();
+	if(this.targ == 0)
+	{
+		this.pushMatrix();
+		this.targetList[0].display();
+		this.popMatrix();
 
-	this.pushMatrix();
-	this.targetList[1].display();
-	this.popMatrix();
+		this.pushMatrix();
+		this.targetList[1].display();
+		this.popMatrix();
 
-	this.pushMatrix();
-	this.targetList[2].display();
-	this.popMatrix();
+		this.pushMatrix();
+		this.targetList[2].display();
+		this.popMatrix();
+	}
+	if(this.targ == 1)
+	{
+
+		this.pushMatrix();
+		this.targetList[1].display();
+		this.popMatrix();
+
+		this.pushMatrix();
+		this.targetList[2].display();
+		this.popMatrix();
+	}
+	if(this.targ == 2)
+	{
+
+		this.pushMatrix();
+		this.targetList[2].display();
+		this.popMatrix();
+	}
+
 
 
 

@@ -147,8 +147,8 @@ MySubmarine.prototype.display = function() {
 	}
 
 	this.scene.translate(this.x,this.y,this.z);
-	this.scene.rotate(this.rotDeep,1,0,0);
 	this.scene.rotate(this.angulo,0,1,0);
+	this.scene.rotate(-this.rotDeep,1,0,0);
 
 
 	//Body
@@ -454,7 +454,7 @@ this.scene.popMatrix();
 MySubmarine.prototype.updateRotation = function(Dir) {
 
 
-	if(this.scene.speed >= 0 && Dir == 0)
+	if(this.scene.speed >= 0 && Dir == 0 )
 	{
 		this.angulo += 5*degToRad;
 		this.vertical_rudder = -25;
@@ -520,20 +520,20 @@ MySubmarine.prototype.restartRudder = function() {
 
 MySubmarine.prototype.updateDeep = function(Dir)
 {
-	if(this.y >= 2 && Dir == 0 && this.scene.speed >=0){
-		this.rotDeep+=25*degToRad;
+	if(Dir == 0 && this.scene.speed >=0 && this.rotDeep < 24*degToRad && this.rotDeep >=-26*degToRad){
+		this.rotDeep+=2*degToRad;
 		this.h_rudder = -25;
 	}
-	if(this.y > 2 && Dir == 1 && this.scene.speed >=0){
-		this.rotDeep-=25*degToRad;
+	if(Dir == 1 && this.scene.speed >=0 && this.rotDeep <= 26*degToRad && this.rotDeep >-24*degToRad){
+		this.rotDeep-=2*degToRad;
 		this.h_rudder = 25;
 	}
-	if(this.y >= 2 && Dir == 0 && this.scene.speed < 0){
-		this.rotDeep-=25*degToRad;
+	if(Dir == 0 && this.scene.speed < 0 && this.rotDeep <= 26*degToRad && this.rotDeep >-24*degToRad){
+		this.rotDeep-=2*degToRad;
 		this.h_rudder = 25;
 	}
-	if(this.y > 2 && Dir == 1 && this.scene.speed < 0){
-		this.rotDeep+=25*degToRad;
+	if(Dir == 1 && this.scene.speed < 0 && this.rotDeep < 24*degToRad && this.rotDeep >=-26*degToRad){
+		this.rotDeep+=2*degToRad;
 		this.h_rudder = -25;
 	}
 

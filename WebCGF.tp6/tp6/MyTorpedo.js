@@ -19,10 +19,10 @@ function MyTorpedo(scene) {
 	
 	//torpedo movement
 	this.p1x=this.x;
-	this.p1y=this.y;
+	this.p1y=this.y-1.1;
 	this.p1z=this.z;
 	this.p2x=this.x+6*Math.sin(this.angulo);
-	this.p2y=this.y;
+	this.p2y=this.y-1.1;
 	this.p2z=this.z+6*Math.cos(this.angulo);
 	this.p3x=this.scene.targetList[this.scene.c].x;
 	this.p3y=this.scene.targetList[this.scene.c].y+3;
@@ -85,14 +85,14 @@ MyTorpedo.prototype.display = function() {
 	//Body
 
 	this.scene.pushMatrix();
-	this.scene.translate(0,-1.1,0);
+	this.scene.translate(0,0,0);
 	this.scene.scale(0.15,0.15,1);
 	this.Body.display();
 	this.scene.popMatrix();
 
 	//nose
 	this.scene.pushMatrix();
-	this.scene.translate(0,-1.1,1);
+	this.scene.translate(0,0,1);
 	this.scene.scale(0.15, 0.15, 0.2);
 	this.FrontTop.display();
 	this.scene.popMatrix();
@@ -100,7 +100,7 @@ MyTorpedo.prototype.display = function() {
 	//tail
 
 	this.scene.pushMatrix();
-	this.scene.translate(0,-1.1,0);
+	this.scene.translate(0,0,0);
 	this.scene.rotate(180*degToRad,0,1,0);
 	this.scene.scale(0.15, 0.15, 0.2);
 	this.BackTop.display();
@@ -109,7 +109,7 @@ MyTorpedo.prototype.display = function() {
 
 	//vertical rudder
 	this.scene.pushMatrix();
-	this.scene.translate(0,-1.1,-0.1);
+	this.scene.translate(0,0,-0.1);
 	this.scene.rotate(90*degToRad,0,0,1);
 	this.scene.rotate(90*degToRad,1,0,0);
 	this.scene.scale(0.25,0.1,0.08);
@@ -119,7 +119,7 @@ MyTorpedo.prototype.display = function() {
 	//horizontal rudder
 
 	this.scene.pushMatrix();
-	this.scene.translate(0,-1.1,-0.1);
+	this.scene.translate(0,0,-0.1);
 	this.scene.rotate(90*degToRad,1,0,0);
 	this.scene.scale(0.25,0.1,0.08);
 	this.rudder.display();
@@ -133,16 +133,26 @@ MyTorpedo.prototype.update = function(currTime) {
 
 if (this.lastUpdate == -1) {
 		this.lastUpdate = currTime;
-		inc = 0.6;
+		inc=0;
 	}
 	else {
 		var diff = currTime - this.lastUpdate;
 		this.lastUpdate = currTime;
 		inc = diff/(this.dist*1000);
 	}
-	this.t+=inc;
-	this.x=Math.pow((1-this.t),3)*this.p1x + 3*this.t*Math.pow((1-this.t),2)*this.p2x+3*Math.pow(this.t,2)*(1-this.t)*this.p3x+Math.pow(this.t,3)*this.p4x; 
-	this.y=Math.pow((1-this.t),3)*this.p1y + 3*this.t*Math.pow((1-this.t),2)*this.p2y+3*Math.pow(this.t,2)*(1-this.t)*this.p3y+Math.pow(this.t,3)*this.p4y;
-	this.z=Math.pow((1-this.t),3)*this.p1z + 3*this.t*Math.pow((1-this.t),2)*this.p2z+3*Math.pow(this.t,2)*(1-this.t)*this.p3z+Math.pow(this.t,3)*this.p4z;  
 
+if(this.x-this.p4x < 0.2 && this.y-this.p4y < 0.2 && this.z-this.p4z < 0.2)
+	{
+		this.scene.etorpedo = 2;
+		this.scene.targ +=1;
+
+	}
+	else
+	{
+		this.t+=inc;
+		this.x=Math.pow((1-this.t),3)*this.p1x + 3*this.t*Math.pow((1-this.t),2)*this.p2x+3*Math.pow(this.t,2)*(1-this.t)*this.p3x+Math.pow(this.t,3)*this.p4x; 
+		this.y=Math.pow((1-this.t),3)*this.p1y + 3*this.t*Math.pow((1-this.t),2)*this.p2y+3*Math.pow(this.t,2)*(1-this.t)*this.p3y+Math.pow(this.t,3)*this.p4y;
+		this.z=Math.pow((1-this.t),3)*this.p1z + 3*this.t*Math.pow((1-this.t),2)*this.p2z+3*Math.pow(this.t,2)*(1-this.t)*this.p3z+Math.pow(this.t,3)*this.p4z;  
+   	}
 }
+
