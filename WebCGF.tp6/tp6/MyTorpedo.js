@@ -12,7 +12,7 @@ function MyTorpedo(scene) {
 
 	this.x = this.scene.submarine.x;
 	this.z = this.scene.submarine.z;
-	this.y = this.scene.submarine.y;
+	this.y = this.scene.submarine.y-1.1;
 	this.angulo = this.scene.submarine.angulo;
 	this.lastUpdate=-1;
 	this.inc=0;
@@ -20,10 +20,10 @@ function MyTorpedo(scene) {
 	
 	//torpedo movement
 	this.p1x=this.x;
-	this.p1y=this.y-1.1;
+	this.p1y=this.y;
 	this.p1z=this.z;
 	this.p2x=this.x+6*Math.sin(this.angulo);
-	this.p2y=this.y-1.1;
+	this.p2y=this.y;
 	this.p2z=this.z+6*Math.cos(this.angulo);
 	this.p3x=this.scene.targetList[this.scene.c].x;
 	this.p3y=this.scene.targetList[this.scene.c].y+3;
