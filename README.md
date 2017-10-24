@@ -15,3 +15,6 @@ Labs Complete(Room with tables) and Final Project Complete(Submarine).
 
 ![](https://github.com/pmiranda07/CGRA_FEUP/blob/master/images/video1.gif)
 
+![](https://github.com/pmiranda07/CGRA_FEUP/blob/master/images/video2.gif)
+
+
